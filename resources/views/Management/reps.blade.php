@@ -6,7 +6,7 @@
 
 @section('heading')
 
-Route Management
+Representative Management
 
 
 @endsection
@@ -17,7 +17,7 @@ Route Management
     <a href="#">Management</a>
 </li>
 <li class="active">
-    <strong>Routes</strong>
+    <strong>Representatives</strong>
 </li>
 
 
@@ -47,38 +47,18 @@ Route Management
                     <thead>
                         <tr>
                             <th>#</th>
+                            
                             <th>Name</th>
-                            <th>Start Point</th>
-                            <th>End Point</th>
-                            <th>Representative</th>
+                            <th>NIC</th>
+                            <th>Phone</th>
+                            
                             <th>Remarks</th>
                             <th class="col-md-1"></th>
                             <th class="col-md-1"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($routes as $r)
-
-                        <tr>
-                            <td> {{$r->id}}</td>
-                            <td> {{$r->route_name}}</td>
-                            <td> {{$r->start}}</td>
-                            <td> {{$r->end}}</td>
-
-                            <td> 
-
-                                @if( $r->rep_name != '0')
-                                {{$r->rep_name}}
-                                @else
-                                <i>Not Assigned Yet.</i>
-                                @endif
-                            </td>
-                            <td> {{$r->remarks}}</td>
-                            <td> <button class="btn btn-info btn-block btn-sm">Edit</button></td>
-                            <td> <button class="btn btn-danger btn-block btn-sm">Delete</button></td>
-                        </tr>
-
-                        @endforeach
+                        
                     </tbody>
 
                 </table>
@@ -93,7 +73,7 @@ Route Management
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Add A Route</h4>
+                <h4 class="modal-title">Add A Representative</h4>
 
             </div>
             <form class="form-horizontal" id="addR" onsubmit="return insert()">
@@ -102,7 +82,7 @@ Route Management
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Route Name</label>
+                        <label class="col-lg-3 control-label"> Name</label>
 
                         <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="name" name="name">
                         </div>
@@ -110,33 +90,20 @@ Route Management
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Start Point</label>
+                        <label class="col-lg-3 control-label">NIC</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="start" name="start">
+                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="nic" name="nic">
 
                         </div>               
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">End Point</label>
+                        <label class="col-lg-3 control-label">Phone</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="end" name="end">
+                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="phone" name="phone">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Representative</label>
-
-                        <div class="col-lg-9"> <select class="form-control" id="rep" name="rep">
-                            <option value="0">Add Later</option>
-
-                            @foreach ($reps as $r)
-                            <option value="{{$r->id}}"> {{$r->rep_name}}</option>
-
-                            @endforeach
-
-                            </select>
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Remarks</label>
@@ -166,7 +133,7 @@ Route Management
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Edit Route #<b id="route_id"></b></h4>
+                <h4 class="modal-title">Edit Representative #<b id="route_id"></b></h4>
 
             </div>
             <form class="form-horizontal" id="addRE" onsubmit="return update()">
@@ -175,7 +142,7 @@ Route Management
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Route Name</label>
+                        <label class="col-lg-3 control-label">Name</label>
 
                         <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="nameE" name="name">
                         </div>
@@ -183,33 +150,20 @@ Route Management
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Start Point</label>
+                        <label class="col-lg-3 control-label">NIC</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="startE" name="start">
+                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="nicE" name="nic">
 
                         </div>               
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">End Point</label>
+                        <label class="col-lg-3 control-label">Phone</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="endE" name="end">
+                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="phoneE" name="phone">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Representative</label>
-
-                        <div class="col-lg-9"> <select class="form-control" id="repE" name="rep">
-                            <option value="0">Add Later</option>
-
-                            @foreach ($reps as $r)
-                            <option value="{{$r->id}}"> {{$r->rep_name}}</option>
-
-                            @endforeach
-
-                            </select>
-                        </div>
-                    </div>
+                    
                     <input type="text" hidden="true" name="id" id="idE">
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Remarks</label>
@@ -252,21 +206,19 @@ Route Management
 
 
      function edit(id){
-         
-        document.getElementById("route_id").innerHTML = id;
         
+         document.getElementById("route_id").innerHTML = id;
          $.ajax({
             type: "get",
-            url: 'get_route_info',
+            url: 'get_rep_info',
             data: {id : id},
 
             success : function(data){
                 
                     console.log(data);
-                    document.getElementById("nameE").value =  data.route_name;
-                    document.getElementById("startE").value =  data.start;
-                    document.getElementById("endE").value =  data.end;
-                    document.getElementById("repE").value =  data.rep_id;
+                    document.getElementById("nameE").value =  data.rep_name;
+                    document.getElementById("nicE").value =  data.nic;
+                    document.getElementById("phoneE").value =  data.phone;
                     document.getElementById("remarksE").value =  data.remarks;
                     document.getElementById("idE").value =  id;
                     
@@ -290,7 +242,7 @@ Route Management
         
          $.ajax({
             type: "get",
-            url: 'edit_routes',
+            url: 'edit_reps',
             data: $('#addRE').serialize(),
 
             success : function(data){
@@ -316,27 +268,12 @@ Route Management
         oTable.destroy();
 
         $('#dd').DataTable( {
-            "ajax": "get-routes",
+            "ajax": "get-reps",
             "columns": [
                 { "data": "id" },
-                { "data": "route_name" },
-                { "data": "start" },
-                { "data": "end" },
-                 {"data" : null,
-                 "mRender": function(data, type, full) {
-                     
-                     if(data.rep_name == '0'){
-                        
-                         return "<span class='label label-warning'> Not Assigned </span>";
-                         
-                     }else{
-                         
-                         return data.rep_name;
-                         
-                     }
-                     
-                 }
-                },
+                { "data": "rep_name" },
+                { "data": "nic" },
+                { "data": "phone" },
                 { "data": "remarks" },
                 {"data" : null,
                  "mRender": function(data, type, full) {
@@ -359,7 +296,7 @@ Route Management
 
         $.ajax({
             type: "get",
-            url: 'insert-routes',
+            url: 'insert-reps',
             data: $('#addR').serialize(),
 
             success : function(data){

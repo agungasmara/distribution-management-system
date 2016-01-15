@@ -23,5 +23,12 @@ Route::get('/', function(){
  Route::get('/get-routes', 'RouteController@get_routes');
  Route::get('/get_route_info', 'RouteController@get_route_info');
  Route::get('/edit_routes', 'RouteController@edit_routes');
+
  
+ Route::get('/reps', 'RepController@rep_main');
+ 
+ Route::get('/insert-reps', 'RepController@insert_reps');
+ Route::get('/get-reps', 'RepController@get_reps');
+ Route::get('/get_rep_info', 'RepController@get_rep_info');
+ Route::get('/edit_reps', 'RepController@edit_reps');
  

@@ -100,10 +100,10 @@
                         <li class="active">
                             <a href="#"><i class="fa fa-book"></i> <span class="nav-label">MANAGEMENT</span> </a>
                             <ul class="nav nav-second-level">
-                                <li  ><a href="customers">Customers</a></li>
-                                <li  ><a href="routes">Routes</a></li>
-                                <li  ><a href="reps">Representatives</a></li>
-                                <li  ><a href="products">Products</a></li>
+                                <li id="cus" ><a href="customers">Customers</a></li>
+                                <li id="rou" ><a href="routes">Routes</a></li>
+                                <li id="rep" ><a href="reps">Representatives</a></li>
+                                <li id="pro" ><a href="products">Products</a></li>
 
                             </ul>
                         </li>

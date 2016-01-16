@@ -26,9 +26,16 @@ Route::get('/', function(){
 
  
  Route::get('/reps', 'RepController@rep_main');
- 
  Route::get('/insert-reps', 'RepController@insert_reps');
  Route::get('/get-reps', 'RepController@get_reps');
  Route::get('/get_rep_info', 'RepController@get_rep_info');
  Route::get('/edit_reps', 'RepController@edit_reps');
+ 
+
+
+ Route::get('/customers', 'CustomerController@customer_main');
+ Route::get('/insert-customer', 'CustomerController@insert_customer');
+ Route::get('/get-customer', 'CustomerController@get_customer');
+ Route::get('/get_customer_info', 'CustomerController@get_customer_info');
+ Route::get('/edit_customer', 'CustomerController@edit_customer');
  

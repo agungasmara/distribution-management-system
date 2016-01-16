@@ -198,7 +198,7 @@ Representative Management
 
     $('document').ready(function(){
 
-
+         document.getElementById("rep").setAttribute('class','active');
         dataLoad();
 
 

@@ -57,28 +57,8 @@ Route Management
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($routes as $r)
+                        
 
-                        <tr>
-                            <td> {{$r->id}}</td>
-                            <td> {{$r->route_name}}</td>
-                            <td> {{$r->start}}</td>
-                            <td> {{$r->end}}</td>
-
-                            <td> 
-
-                                @if( $r->rep_name != '0')
-                                {{$r->rep_name}}
-                                @else
-                                <i>Not Assigned Yet.</i>
-                                @endif
-                            </td>
-                            <td> {{$r->remarks}}</td>
-                            <td> <button class="btn btn-info btn-block btn-sm">Edit</button></td>
-                            <td> <button class="btn btn-danger btn-block btn-sm">Delete</button></td>
-                        </tr>
-
-                        @endforeach
                     </tbody>
 
                 </table>
@@ -243,8 +223,8 @@ Route Management
 
 
     $('document').ready(function(){
-
-
+        
+        document.getElementById("rou").setAttribute('class','active');
         dataLoad();
 
 

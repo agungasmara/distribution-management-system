@@ -84,7 +84,7 @@ Representative Management
 
                         <label class="col-lg-3 control-label"> Name</label>
 
-                        <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="name" name="name">
+                        <div class="col-lg-9"><input placeholder="Rep Name" class="form-control" type="text" required id="name" name="name">
                         </div>
                     </div>
 
@@ -92,14 +92,14 @@ Representative Management
 
                         <label class="col-lg-3 control-label">NIC</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="nic" name="nic">
+                        <div class="col-lg-9"><input placeholder="12345678V" class="form-control" type="text" required id="nic" name="nic">
 
                         </div>               
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="phone" name="phone">
+                        <div class="col-lg-9"><input placeholder="Phone Number" class="form-control" type="text" required id="phone" name="phone">
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@ Representative Management
 
                         <label class="col-lg-3 control-label">Name</label>
 
-                        <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="nameE" name="name">
+                        <div class="col-lg-9"><input placeholder="Representative Name" class="form-control" type="text" required id="nameE" name="name">
                         </div>
                     </div>
 
@@ -152,14 +152,14 @@ Representative Management
 
                         <label class="col-lg-3 control-label">NIC</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="nicE" name="nic">
+                        <div class="col-lg-9"><input placeholder="123456789V" class="form-control" type="text" required id="nicE" name="nic">
 
                         </div>               
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Phone</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="phoneE" name="phone">
+                        <div class="col-lg-9"><input placeholder="Phone Number" class="form-control" type="text" required id="phoneE" name="phone">
                         </div>
                     </div>
 
@@ -198,7 +198,8 @@ Representative Management
 
     $('document').ready(function(){
 
-         document.getElementById("rep").setAttribute('class','active');
+        $('#man').click();
+        document.getElementById("rep").setAttribute('class','active');
         dataLoad();
 
 
@@ -315,6 +316,26 @@ Representative Management
 
 
     }
+    
+    function del(id){
+        
+             $.ajax({
+            type: "get",
+            url: 'del_reps',
+            data: {id : id},
+
+            success : function(data){
+                
+                    console.log(data);
+                    dataLoad();
+                     
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }	 
+        }); 
+     }
 
 </script>
 @endsection

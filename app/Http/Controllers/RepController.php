@@ -77,6 +77,19 @@ class RepController extends Controller
         
         
     }
+    
+    
+        public function del_reps(Request $request){
+        
+        
+        $id = $request->input('id');
+        
+        $reps = Rep::find($id);
+        
+        $reps->delete();
+        
+    }
+    
 
 
     

@@ -91,6 +91,18 @@ class CustomerController extends Controller
         
         
     }
+    
+    public function del_customer(Request $request){
+        
+        
+        $id = $request->input('id');
+        
+        $customer = Customer::find($id);
+        
+        $customer->delete();
+        
+    }
+    
 
 
     

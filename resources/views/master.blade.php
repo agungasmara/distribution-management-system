@@ -97,13 +97,15 @@
                         </li>
 
 
-                        <li class="active">
-                            <a href="#"><i class="fa fa-book"></i> <span class="nav-label">MANAGEMENT</span> </a>
+                        <li  >
+                            <a href="#" id="man"><i class="fa fa-book"></i> <span class="nav-label">MANAGEMENT</span> </a>
                             <ul class="nav nav-second-level">
                                 <li id="cus" ><a href="customers">Customers</a></li>
                                 <li id="rou" ><a href="routes">Routes</a></li>
                                 <li id="rep" ><a href="reps">Representatives</a></li>
-                                <li id="pro" ><a href="products">Products</a></li>
+                                 <li id="veh" ><a href="vehicles">Vehicles</a></li>
+ 
+                                
 
                             </ul>
                         </li>

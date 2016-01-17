@@ -77,6 +77,17 @@ class RouteController extends Controller {
         
         
     }
+    public function del_routes(Request $request){
+        
+        
+        $id = $request->input('id');
+        
+        $routes = Route::find($id);
+        
+        $routes->delete();
+        
+    }
+    
 
 
 }

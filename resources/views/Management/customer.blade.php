@@ -97,7 +97,7 @@ Customer Management
                      <div class="form-group">
                         <label class="col-lg-2 control-label">Address Line 1</label>
 
-                        <div class="col-lg-10"><input placeholder="Address Line 1..." class="form-control" type="text" required id="add1" name="add1">
+                        <div class="col-lg-10"><input placeholder="Customer Address Line 1..." class="form-control" type="text" required id="add1" name="add1">
                         </div>
                     </div>
 
@@ -189,7 +189,7 @@ Customer Management
                      <div class="form-group">
                         <label class="col-lg-2 control-label">Address Line 1</label>
 
-                        <div class="col-lg-10"><input placeholder="Address Line 1..." class="form-control" type="text" required id="add1E" name="add1">
+                        <div class="col-lg-10"><input placeholder="Customer Address Line 1..." class="form-control" type="text" required id="add1E" name="add1">
                         </div>
                     </div>
 
@@ -262,7 +262,8 @@ Customer Management
 
     $('document').ready(function(){
 
-         document.getElementById("cus").setAttribute('class','active');
+        $('#man').click();
+        document.getElementById("cus").setAttribute('class','active');
         dataLoad();
 
 
@@ -385,6 +386,28 @@ Customer Management
         return false; 
 
 
+    }
+    
+    function del(id){
+        
+             $.ajax({
+            type: "get",
+            url: 'del_customer',
+            data: {id : id},
+
+            success : function(data){
+                
+                    console.log(data);
+                    dataLoad();
+                     
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+            }	 
+        }); 
+        
+        
     }
 
 </script>

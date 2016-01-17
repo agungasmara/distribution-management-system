@@ -6,7 +6,7 @@
 
 @section('heading')
 
-Route Management
+Vehicle Management
 
 
 @endsection
@@ -17,7 +17,7 @@ Route Management
     <a href="#">Management</a>
 </li>
 <li class="active">
-    <strong>Routes</strong>
+    <strong>Vehicles</strong>
 </li>
 
 
@@ -47,10 +47,11 @@ Route Management
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Start Point</th>
-                            <th>End Point</th>
-                            <th>Representative</th>
+                            
+                            <th>Model</th>
+                            <th>Vehicle Number</th>
+                            <th>Type</th>
+                            
                             <th>Remarks</th>
                             <th class="col-md-1"></th>
                             <th class="col-md-1"></th>
@@ -58,7 +59,6 @@ Route Management
                     </thead>
                     <tbody>
                         
-
                     </tbody>
 
                 </table>
@@ -73,7 +73,7 @@ Route Management
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Add A Route</h4>
+                <h4 class="modal-title">Add A Vehicle</h4>
 
             </div>
             <form class="form-horizontal" id="addR" onsubmit="return insert()">
@@ -82,41 +82,36 @@ Route Management
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Route Name</label>
+                        <label class="col-lg-3 control-label"> Model</label>
 
-                        <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="name" name="name">
+                        <div class="col-lg-9"><input placeholder="Vehicle Model" class="form-control" type="text" required id="model" name="model">
                         </div>
                     </div>
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Start Point</label>
+                        <label class="col-lg-3 control-label">Vehicle Number</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="start" name="start">
+                        <div class="col-lg-9"><input placeholder="Vehicle Number" class="form-control" type="text" required id="vehi_num" name="vehi_num">
 
                         </div>               
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">End Point</label>
+                        <label class="col-lg-3 control-label">Type</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="end" name="end">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Representative</label>
-
-                        <div class="col-lg-9"> <select class="form-control" id="rep" name="rep">
-                            <option value="0">Add Later</option>
-
-                            @foreach ($reps as $r)
-                            <option value="{{$r->id}}"> {{$r->rep_name}}</option>
-
-                            @endforeach
-
+                        <div class="col-lg-9">
+                            <select class="form-control" id="type" name="type">
+                            <option value="Lorry">Lorry</option>
+                            <option value="Van">Van</option>
+                            <option value="Car">Car</option>
+                            <option value="3-Wheel">3-Wheel</option> 
+                            <option value="Bike">Bike</option>    
+                            
                             </select>
                         </div>
                     </div>
+
+                    
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Remarks</label>
@@ -146,51 +141,46 @@ Route Management
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Edit Route #<b id="route_id"></b></h4>
+                <h4 class="modal-title">Edit Vehicle #<b id="route_id"></b></h4>
 
             </div>
             <form class="form-horizontal" id="addRE" onsubmit="return update()">
-                <div class="modal-body">
+                   <div class="modal-body">
 
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Route Name</label>
+                        <label class="col-lg-3 control-label"> Model</label>
 
-                        <div class="col-lg-9"><input placeholder="Route Name" class="form-control" type="text" required id="nameE" name="name">
+                        <div class="col-lg-9"><input placeholder="Vehicle Model" class="form-control" type="text" required id="modelE" name="model">
                         </div>
                     </div>
 
                     <div class="form-group">
 
-                        <label class="col-lg-3 control-label">Start Point</label>
+                        <label class="col-lg-3 control-label">Vehicle Number</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route begins" class="form-control" type="text" required id="startE" name="start">
+                        <div class="col-lg-9"><input placeholder="Vehicle Number" class="form-control" type="text" required id="vehi_numE" name="vehi_num">
 
                         </div>               
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">End Point</label>
+                        <label class="col-lg-3 control-label">Type</label>
 
-                        <div class="col-lg-9"><input placeholder="Where the route ends" class="form-control" type="text" required id="endE" name="end">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Representative</label>
-
-                        <div class="col-lg-9"> <select class="form-control" id="repE" name="rep">
-                            <option value="0">Add Later</option>
-
-                            @foreach ($reps as $r)
-                            <option value="{{$r->id}}"> {{$r->rep_name}}</option>
-
-                            @endforeach
-
+                        <div class="col-lg-9">
+                            <select class="form-control" id="typeE" name="type">
+                            <option value="Lorry">Lorry</option>
+                            <option value="Van">Van</option>
+                            <option value="Car">Car</option>
+                            <option value="3-Wheel">3-Wheel</option> 
+                            <option value="Bike">Bike</option>    
+                            
                             </select>
                         </div>
                     </div>
-                    <input type="text" hidden="true" name="id" id="idE">
+
+                    <input  type="text" id="idE" name="id" hidden="true">
+
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Remarks</label>
 
@@ -223,30 +213,32 @@ Route Management
 
 
     $('document').ready(function(){
+
         
+        //document.getElementById("man").setAttribute('class','active');
+       // document.getElementById("man").click();
         $('#man').click();
-        document.getElementById("rou").setAttribute('class','active');
+        document.getElementById("veh").setAttribute('class','active');
         dataLoad();
+
 
     });
 
 
      function edit(id){
-         
-        document.getElementById("route_id").innerHTML = id;
         
+         document.getElementById("route_id").innerHTML = id;
          $.ajax({
             type: "get",
-            url: 'get_route_info',
+            url: 'get_vehicle_info',
             data: {id : id},
 
             success : function(data){
                 
                     console.log(data);
-                    document.getElementById("nameE").value =  data.route_name;
-                    document.getElementById("startE").value =  data.start;
-                    document.getElementById("endE").value =  data.end;
-                    document.getElementById("repE").value =  data.rep_id;
+                    document.getElementById("modelE").value =  data.vehicle_model;
+                    document.getElementById("vehi_numE").value =  data.vehicle_number;
+                    document.getElementById("typeE").value =  data.vehicle_type;
                     document.getElementById("remarksE").value =  data.remarks;
                     document.getElementById("idE").value =  id;
                     
@@ -270,7 +262,7 @@ Route Management
         
          $.ajax({
             type: "get",
-            url: 'edit_routes',
+            url: 'edit_vehicles',
             data: $('#addRE').serialize(),
 
             success : function(data){
@@ -296,27 +288,12 @@ Route Management
         oTable.destroy();
 
         $('#dd').DataTable( {
-            "ajax": "get-routes",
+            "ajax": "get-vehicles",
             "columns": [
                 { "data": "id" },
-                { "data": "route_name" },
-                { "data": "start" },
-                { "data": "end" },
-                 {"data" : null,
-                 "mRender": function(data, type, full) {
-                     
-                     if(data.rep_name == '0'){
-                        
-                         return "<span class='label label-warning'> Not Assigned </span>";
-                         
-                     }else{
-                         
-                         return data.rep_name;
-                         
-                     }
-                     
-                 }
-                },
+                { "data": "vehicle_model" },
+                { "data": "vehicle_number" },
+                { "data": "vehicle_type" },
                 { "data": "remarks" },
                 {"data" : null,
                  "mRender": function(data, type, full) {
@@ -339,7 +316,7 @@ Route Management
 
         $.ajax({
             type: "get",
-            url: 'insert-routes',
+            url: 'insert-vehicles',
             data: $('#addR').serialize(),
 
             success : function(data){
@@ -362,7 +339,7 @@ Route Management
         
              $.ajax({
             type: "get",
-            url: 'del_routes',
+            url: 'del_vehicles',
             data: {id : id},
 
             success : function(data){
@@ -376,7 +353,7 @@ Route Management
                 console.log(thrownError);
             }	 
         }); 
-     }
+    }
         
 
 </script>

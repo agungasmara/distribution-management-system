@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Categories extends Migration
+class Brands extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,13 @@ class Categories extends Migration
     public function up()
     {
         //
+            Schema::create('brands', function(Blueprint $table){
+			$table->increments('id');
+			$table->string('brand_name');
+            $table->string('manufacturer');    
+            $table->string('remarks')->nullable();
+			$table->timestamps();
+		});
     }
 
     /**
@@ -23,5 +30,6 @@ class Categories extends Migration
     public function down()
     {
         //
+        Schema::drop('brands');
     }
 }

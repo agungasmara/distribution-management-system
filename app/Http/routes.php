@@ -48,3 +48,37 @@ Route::get('/', function(){
  Route::get('/get_vehicle_info', 'VehicleController@get_vehicle_info');
  Route::get('/edit_vehicles', 'VehicleController@edit_vehicles');
  Route::get('/del_vehicles', 'VehicleController@del_vehicles');
+
+
+
+
+ Route::get('/categories', 'CategoryController@category_main');
+ Route::get('/insert-category', 'CategoryController@insert_category');
+ Route::get('/get-category', 'CategoryController@get_category');
+ Route::get('/get_category_info', 'CategoryController@get_category_info');
+ Route::get('/edit_category', 'CategoryController@edit_category');
+ Route::get('/del_category', 'CategoryController@del_category');
+
+ Route::get('/insert-brand', 'BrandController@insert_brand');
+ Route::get('/get-brand', 'BrandController@get_brand');
+ Route::get('/get_brand_info', 'BrandController@get_brand_info');
+ Route::get('/edit_brand', 'BrandController@edit_brand');
+ Route::get('/del_brand', 'BrandController@del_brand');
+
+
+
+
+
+ Route::get('/products', 'ProductController@product_main');
+ Route::get('/insert-product', 'ProductController@insert_product');
+ Route::get('/insert-sproduct', 'ProductController@insert_sproduct');
+ Route::get('/get-subproduct', 'ProductController@get_subproduct');
+ Route::get('/get_product_info', 'ProductController@get_product_info');
+ Route::get('/edit_product', 'ProductController@edit_product');
+ Route::get('/del_sp', 'ProductController@del_sp');
+
+ Route::get('/get-products', 'ProductController@get_products');
+ Route::get('/get-subproducts', 'ProductController@get_subproducts');
+
+
+

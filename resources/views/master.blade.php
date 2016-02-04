@@ -110,6 +110,17 @@
                             </ul>
                         </li>
 
+                               <li  >
+                            <a href="#" id="pro"><i class="fa fa-book"></i> <span class="nav-label">PRODUCTS</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li id="cat" ><a href="categories">Categories/Brands</a></li>
+                               
+                                <li id="prod" ><a href="products">Products</a></li>
+ 
+                                
+
+                            </ul>
+                        </li>
 
 
                     </ul>

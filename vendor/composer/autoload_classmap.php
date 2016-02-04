@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Brands' => $baseDir . '/database/migrations/2016_01_30_180454_brands.php',
     'Categories' => $baseDir . '/database/migrations/2016_01_17_153303_categories.php',
     'CreateCustomers' => $baseDir . '/database/migrations/2016_01_16_090823_create_customers.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -517,7 +518,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\Exception' => $vendorDir . '/sebastian/recursion-context/src/Exception.php',
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
-    'SubProducts' => $baseDir . '/database/migrations/2016_01_17_153336_sub_products.php',
+    'SubProducts' => $baseDir . '/database/migrations/2016_01_30_180816_sub_products.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'Vehicles' => $baseDir . '/database/migrations/2016_01_17_153318_vehicles.php',

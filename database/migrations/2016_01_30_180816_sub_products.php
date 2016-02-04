@@ -13,6 +13,14 @@ class SubProducts extends Migration
     public function up()
     {
         //
+
+        Schema::create('sub_products', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('sub_name');
+            $table->integer('pro_id')->nullable();
+            $table->string('remarks')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,5 +31,6 @@ class SubProducts extends Migration
     public function down()
     {
         //
+        Schema::drop('sub_products');
     }
 }

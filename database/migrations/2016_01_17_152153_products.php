@@ -19,7 +19,9 @@ class Products extends Migration
 			$table->increments('id');
 			$table->string('product_name');
 			$table->integer('cat_id')->nullable();
-			$table->string('manu_name')->nullable();
+            $table->integer('brand_id')->nullable();  
+            //$table->integer('product_sub')->nullable();    
+			//$table->string('manu_name')->nullable();
             $table->string('remarks')->nullable();
 			$table->timestamps();
 		});

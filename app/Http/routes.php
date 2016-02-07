@@ -81,4 +81,9 @@ Route::get('/', function(){
  Route::get('/get-subproducts', 'ProductController@get_subproducts');
 
 
-
+ Route::get('/astocks', 'StockController@main');
+ Route::get('/insert-stock', 'StockController@insert_stock');
+ Route::get('/get-stock', 'StockController@get_stock');
+ Route::get('/get_stock_info', 'StockController@get_stock_info');
+ Route::get('/edit_stock', 'StockController@edit_stock');
+ Route::get('/del_stock', 'StockController@del_stock');

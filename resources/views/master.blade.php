@@ -50,7 +50,8 @@
         <link href="{{ URL::asset('css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/plugins/dataTables/dataTables.tableTools.min.css') }}" rel="stylesheet">
 
-
+        <link href="{{ URL::asset('css/plugins/chosen/chosen.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
 
 
 
@@ -103,21 +104,33 @@
                                 <li id="cus" ><a href="customers">Customers</a></li>
                                 <li id="rou" ><a href="routes">Routes</a></li>
                                 <li id="rep" ><a href="reps">Representatives</a></li>
-                                 <li id="veh" ><a href="vehicles">Vehicles</a></li>
- 
-                                
+                                <li id="veh" ><a href="vehicles">Vehicles</a></li>
+
+
 
                             </ul>
                         </li>
 
-                               <li  >
+                        <li  >
                             <a href="#" id="pro"><i class="fa fa-book"></i> <span class="nav-label">PRODUCTS</span> </a>
                             <ul class="nav nav-second-level">
                                 <li id="cat" ><a href="categories">Categories/Brands</a></li>
-                               
+
                                 <li id="prod" ><a href="products">Products</a></li>
- 
-                                
+
+
+
+                            </ul>
+                        </li>
+
+                        <li  >
+                            <a href="#" id="sto"><i class="fa fa-book"></i> <span class="nav-label">STOCKS</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li id="stocks" ><a href="astocks">Available Stocks</a></li>
+                                <li id="log" ><a href="astocks">Stock History</a></li>
+
+
+
 
                             </ul>
                         </li>
@@ -196,6 +209,8 @@
         <script src="{{ URL::asset('js/plugins/pace/pace.min.js') }}"></script>
         <script src="{{ URL::asset('js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
+        <script src="{{ URL::asset('js/plugins/chosen/chosen.jquery.js')}}"></script>
+        <script src="{{ URL::asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
         <script src="{{ URL::asset('js/plugins/dataTables/jquery.dataTables.js') }}"></script>
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.bootstrap.js') }}"></script>

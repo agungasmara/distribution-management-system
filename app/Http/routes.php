@@ -76,13 +76,18 @@ Route::get('/', function(){
  Route::get('/get_product_info', 'ProductController@get_product_info');
  Route::get('/edit_product', 'ProductController@edit_product');
  Route::get('/del_sp', 'ProductController@del_sp');
+ Route::get('/del_product', 'ProductController@del_product');
 
  Route::get('/get-products', 'ProductController@get_products');
  Route::get('/get-subproducts', 'ProductController@get_subproducts');
 
 
+ Route::get('/grn', 'StockController@grn');
+ Route::get('/get-grn', 'StockController@get_grn');
+ Route::get('/del_grns', 'StockController@del_grns');
  Route::get('/astocks', 'StockController@main');
  Route::get('/insert-stock', 'StockController@insert_stock');
+ Route::get('/insert-stock_main', 'StockController@insert_stock_main');
  Route::get('/get-stock', 'StockController@get_stock');
  Route::get('/get_stock_info', 'StockController@get_stock_info');
  Route::get('/edit_stock', 'StockController@edit_stock');

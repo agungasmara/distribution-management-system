@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Stocks extends Migration
+class Stockmain extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,11 @@ class Stocks extends Migration
     {
         //
         
-        
-        Schema::create('stocks', function(Blueprint $table){
+         Schema::create('stock_main', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('stock_main_id')->nullable();
-            $table->integer('sub_product_id')->nullable();
-            $table->integer('initial')->nullable();
-            $table->string('available')->nullable();
-            $table->date('expiry_date')->nullable();
+            $table->string('stock_code');
+            $table->date('recieved_date')->nullable();
             $table->string('remarks')->nullable();
-            $table->string('status')->default('ACTIVE');
             $table->timestamps();
         });
     }
@@ -36,7 +31,6 @@ class Stocks extends Migration
     public function down()
     {
         //
-        
-          Schema::drop('stocks');
+          Schema::drop('stock_main');
     }
 }

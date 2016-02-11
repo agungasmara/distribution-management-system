@@ -58,6 +58,7 @@ class ProductController extends Controller
         $sproduct->sub_name = $request->input('sname');
         $sproduct->pro_id = $request->input('pid');
         $sproduct->price = $request->input('sprice');
+        $sproduct->buying_price = $request->input('sbprice');
         $sproduct->remarks = $request->input('sremarks');
 
 
@@ -150,6 +151,15 @@ class ProductController extends Controller
         $sp->delete();
 
     }
+    public function del_product(Request $request){
+        
+        
+        $id = $request->input('id');
 
+        $p = Product::find($id);
+
+        $p->delete();
+        
+    }
 
 }

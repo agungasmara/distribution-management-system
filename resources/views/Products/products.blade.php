@@ -93,7 +93,8 @@ Products
 
                                             <th>Product Name</th>
                                             <th>Sub Product</th>
-                                            <th>Unit Price</th>
+                                            <th>Buying Price</th>
+                                            <th>Selling Price</th>
                                             <th>Remarks</th>
                                             <th class="col-md-1"></th>
                                             <th class="col-md-1"></th>
@@ -230,10 +231,19 @@ Products
 
 
                             <input type="text" hidden="true" id="pid" name="pid">
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Unit Price</label>
+                            
+                            
+                               <div class="form-group">
+                                <label class="col-lg-3 control-label">Buying Price</label>
 
-                                <div class="col-lg-9"><input  placeholder="Unit Price" class="form-control" type="text" required id="sprice" name="sprice" disabled> 
+                                <div class="col-lg-9"><input  placeholder="Buying Unit Price" class="form-control" type="text" required id="sbprice" name="sbprice" disabled> 
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Selling Price</label>
+
+                                <div class="col-lg-9"><input  placeholder="Selling Unit Price" class="form-control" type="text" required id="sprice" name="sprice" disabled> 
                                 </div>
                             </div>
 
@@ -268,7 +278,8 @@ Products
                                 <th>#</th>
 
                                 <th>Sub Product Name</th>
-                                <th>Unit Price (Rs.)</th>
+                                 <th>Buying Price (Rs.)</th>
+                                <th>Selling Price (Rs.)</th>
 
                                 <th>Remarks</th>
 
@@ -490,6 +501,7 @@ Products
                 { "data": "id" },
                 { "data": "product_name" },
                 { "data": "sub_name" },
+                { "data": "buying_price" },
                 { "data": "price" },
                 { "data": "remarks" },
                 {"data" : null,
@@ -630,11 +642,11 @@ Products
 
 
 
-    function delC(id){
+    function delP(id){
 
         $.ajax({
             type: "get",
-            url: 'del_category',
+            url: 'del_product',
             data: {id : id},
 
             success : function(data){

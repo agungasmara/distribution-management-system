@@ -126,8 +126,10 @@
                         <li  >
                             <a href="#" id="sto"><i class="fa fa-book"></i> <span class="nav-label">STOCKS</span> </a>
                             <ul class="nav nav-second-level">
-                                <li id="stocks" ><a href="astocks">Available Stocks</a></li>
+                                <li id="grn" ><a href="grn">Good Recieve Note</a></li>
+                                <li id="stocks" ><a href="astocks">Active Stocks</a></li>
                                 <li id="log" ><a href="astocks">Stock History</a></li>
+                                
 
 
 

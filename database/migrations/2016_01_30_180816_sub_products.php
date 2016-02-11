@@ -17,6 +17,8 @@ class SubProducts extends Migration
         Schema::create('sub_products', function(Blueprint $table){
             $table->increments('id');
             $table->string('sub_name');
+            $table->double('buying_price');
+            $table->double('price');
             $table->integer('pro_id')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();

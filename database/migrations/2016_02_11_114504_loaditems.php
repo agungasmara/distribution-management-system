@@ -21,6 +21,8 @@ class Loaditems extends Migration
             $table->integer('sub_product_id')->nullable();
             $table->integer('stock_id')->nullable();
             $table->integer('number')->nullable();
+            $table->integer('unload_qty')->nullable(); 
+            $table->string('unload_remarks')->nullable(); 
             $table->timestamps();
         });
         

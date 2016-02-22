@@ -141,9 +141,8 @@
                         <li  >
                             <a href="#" id="loa"><i class="fa fa-book"></i> <span class="nav-label">LOADING/UNLOADING</span> </a>
                             <ul class="nav nav-second-level">
-                                <li id="load" ><a href="load">Load Vehicle</a></li>
-                                <li id="stocks" ><a href="active-vehicles">Active Vehicles</a></li>
-                                <li id="log" ><a href="unload">Unload</a></li>
+                                <li id="load" ><a href="load">Available Vehicles</a></li>
+                                <li id="act" ><a href="active-vehicles">Active Vehicles</a></li>
                                 
 
 

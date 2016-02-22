@@ -180,4 +180,81 @@ class VehicleController extends Controller
 
     }
 
+    public function active(Request $request){
+
+
+        return view('LoadUnload.active');
+    }
+
+    public function loaded_vehicles(){
+
+
+        $vehicle = DB::select(DB::raw("select A.*, (SELECT B.load_date FROM `loading_main` B where B.vehicle_id = A.id AND B.status = 'ACTIVE' limit 1) as load_date from `vehicles` A where A.status = 'LOADED'"));
+
+        return response()->json(['count' => count($vehicle), 'data' => $vehicle]);
+
+
+
+    }
+
+    public function unload(Request $request){
+
+        $loadMain = loadMain::where('status','ACTIVE')
+            ->where('vehicle_id',$request->input('id'))->first();
+
+        $load_id = $loadMain->id;
+
+        $vehicle = vehicle::find($request->input('id'));
+
+        $loadItems = DB::select(DB::raw("Select A.*,
+        (SELECT CONCAT( (SELECT C.product_name FROM `products` C where C.id = B.pro_id), '-',B.sub_name) FROM `sub_products` B where B.id = A.sub_product_id) as pro_name
+        from `load_items` A where A.load_main_id ='$load_id'"));                        
+
+        return view('LoadUnload.unload')
+            ->with('vehicle',$vehicle)    
+            ->with('loadMain',$loadMain)
+            ->with('loadItems',$loadItems);
+
+    }
+
+    public function unloadall(Request $request){
+
+        $vehicle = vehicle::find($request->input('vehicleId'));
+
+        $vehicle->status = 'AVAILABLE';
+
+        $vehicle->save();
+
+
+        $loadMain = loadMain::find($request->input('loadMainId'));
+
+        $loadMain->status = 'UNLOADED';
+        $loadMain->unload_date = date('Y-m-d'); 
+
+        $loadMain->save();
+
+
+        for($i=0; $i< $request->input('countInfo'); $i++){
+
+            $loadItem = loadItem::find($request->input('loadItemId'.$i));
+
+            $loadItem->unload_qty = $request->input('unload'.$i);
+            $loadItem->unload_remarks = $request->input('remarks'.$i);
+
+            $loadItem->save();
+
+
+            $stock = stock::find($request->input('stock'.$i));
+
+            $avb = $stock->available + $request->input('unload'.$i);
+
+            $stock->available = $avb;
+
+            $stock->save();
+
+
+        }
+
+    }
+
 }

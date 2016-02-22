@@ -98,3 +98,8 @@ Route::get('/', function(){
  Route::get('/getActive-vehicles', 'VehicleController@active_vehicles');
  Route::get('/load-view', 'VehicleController@load_vehicle');
  Route::get('/insert_load', 'VehicleController@insert_load');
+
+ Route::get('/active-vehicles','VehicleController@active');
+ Route::get('/getLoaded-vehicles', 'VehicleController@loaded_vehicles');
+ Route::get('/unload-view', 'VehicleController@unload');
+ Route::get('/unloadall', 'VehicleController@unloadall');

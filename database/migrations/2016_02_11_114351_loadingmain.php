@@ -21,6 +21,7 @@ class Loadingmain extends Migration
             $table->integer('route_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->string('status')->default('ACTIVE');
+            $table->date('unload_date')->nullable();
             $table->timestamps();
         });
     }

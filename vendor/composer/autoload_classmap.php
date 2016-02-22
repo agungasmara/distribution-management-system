@@ -84,6 +84,8 @@ return array(
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'Loadingmain' => $baseDir . '/database/migrations/2016_02_11_114351_loadingmain.php',
+    'Loaditems' => $baseDir . '/database/migrations/2016_02_11_114504_loaditems.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
     'PHPUnit_Extensions_PhptTestCase' => $vendorDir . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -523,5 +525,7 @@ return array(
     'SubProducts' => $baseDir . '/database/migrations/2016_01_30_180816_sub_products.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'VehicleLoad' => $baseDir . '/database/migrations/2016_02_22_035441_vehicle_load.php',
+    'VehicleLoadItems' => $baseDir . '/database/migrations/2016_02_22_035710_vehicle_load_items.php',
     'Vehicles' => $baseDir . '/database/migrations/2016_01_17_153318_vehicles.php',
 );

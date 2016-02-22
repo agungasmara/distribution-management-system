@@ -18,6 +18,7 @@ class Vehicles extends Migration
             Schema::create('vehicles', function(Blueprint $table){
 			$table->increments('id');
 			$table->string('vehicle_model');
+            $table->string('status')->default('AVAILABLE');
 			$table->string('vehicle_number')->nullable();
 			$table->string('vehicle_type')->nullable();
             $table->string('remarks')->nullable();

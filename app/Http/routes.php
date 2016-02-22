@@ -92,3 +92,9 @@ Route::get('/', function(){
  Route::get('/get_stock_info', 'StockController@get_stock_info');
  Route::get('/edit_stock', 'StockController@edit_stock');
  Route::get('/del_stock', 'StockController@del_stock');
+
+
+ Route::get('/load','VehicleController@load');
+ Route::get('/getActive-vehicles', 'VehicleController@active_vehicles');
+ Route::get('/load-view', 'VehicleController@load_vehicle');
+ Route::get('/insert_load', 'VehicleController@insert_load');

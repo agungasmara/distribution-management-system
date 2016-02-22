@@ -136,7 +136,21 @@
 
                             </ul>
                         </li>
+                        
+                        
+                        <li  >
+                            <a href="#" id="loa"><i class="fa fa-book"></i> <span class="nav-label">LOADING/UNLOADING</span> </a>
+                            <ul class="nav nav-second-level">
+                                <li id="load" ><a href="load">Load Vehicle</a></li>
+                                <li id="stocks" ><a href="active-vehicles">Active Vehicles</a></li>
+                                <li id="log" ><a href="unload">Unload</a></li>
+                                
 
+
+
+
+                            </ul>
+                        </li>
 
                     </ul>
 
@@ -145,39 +159,13 @@
 
             <div id="page-wrapper" class="gray-bg">
                 <div class="row border-bottom">
-                    <!--    <nav class="navbar   navbar-static-top " role="navigation" style="margin-bottom: 0">
-
-<ul class="nav navbar-top-links navbar-right">
-<li>
-<span class="m-r-sm text-muted welcome-message">Welcome to Distribution Management System.</span>
-</li>
-
-
-
-
-<li>
-<a href="#">
-<i class="fa fa-sign-out"></i> Log out
-</a>
-</li>
-</ul>
-
-</nav> -->
+  
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-sm-8">
                         <h2>@yield('heading')</h2>
                         <ol class="breadcrumb">
-                            <!-- <li>
-<a href="index.html">This is</a>
-</li>
-<li class="active">
-<strong>Breadcrumb</strong>
-</li> -->
                             @yield('breadcrumb')
-
-
-
                         </ol>
                     </div>
                     <div class="col-sm-4">

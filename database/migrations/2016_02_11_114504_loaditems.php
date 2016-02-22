@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Stocks extends Migration
+class Loaditems extends Migration
 {
     /**
      * Run the migrations.
@@ -15,17 +15,15 @@ class Stocks extends Migration
         //
         
         
-        Schema::create('stocks', function(Blueprint $table){
+          Schema::create('load_items', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('stock_main_id')->nullable();
+            $table->integer('load_main_id')->nullable();
             $table->integer('sub_product_id')->nullable();
-            $table->integer('initial')->nullable();
-            $table->integer('available')->nullable();
-            $table->date('expiry_date')->nullable();
-            $table->string('remarks')->nullable();
-            $table->string('status')->default('ACTIVE');
+            $table->integer('stock_id')->nullable();
+            $table->integer('number')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -37,6 +35,6 @@ class Stocks extends Migration
     {
         //
         
-          Schema::drop('stocks');
+         Schema::drop('load_items');
     }
 }

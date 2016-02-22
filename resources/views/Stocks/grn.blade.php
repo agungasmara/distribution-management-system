@@ -236,7 +236,8 @@ Good Recieve Note
             keyboardNavigation: false,
             forceParse: false,
             calendarWeeks: true,
-            autoclose: true
+            autoclose: true,
+             format:"yyyy-mm-dd"
         });
 
 
@@ -245,7 +246,8 @@ Good Recieve Note
             keyboardNavigation: false,
             forceParse: false,
             calendarWeeks: true,
-            autoclose: true
+            autoclose: true,
+             format:"yyyy-mm-dd"
         });
 
     });

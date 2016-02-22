@@ -121,16 +121,8 @@ class StockController extends Controller
 
     }
 
-    public function get_stock_info(Request $request){
-
-        $id = $request->input('id');
-
-        $reps = Rep::find($id);
-
-        return $reps;
-
-
-    }
+   
+   
 
 
     public function del_grns(Request $request){
@@ -144,7 +136,43 @@ class StockController extends Controller
 
     }
 
+    public function get_activestocks(){
+        
+        $results = DB::select(DB::raw("Select A.* ,
+        (Select B.product_name From products B where B.id = A.pro_id) as product_name,
+        (Select SUM(C.available) From stocks C where C.sub_product_id = A.id AND C.status = 'ACTIVE') as count1
+        from sub_products A"));
+        
+        return response()->json(['count' => count($results), 'data' => $results]);
 
+    }
+
+    public function stock_history(){
+        
+        
+         return view('Stocks.stockHistory');
+    }
     
+    public function get_stock_history(){
+        
+        $stocks = StockMain::orderBy('recieved_date','DESC')->get();
+        return response()->json(['count' => count($stocks), 'data' => $stocks]);
+        
+    }
+    
+    public function get_stock_info(Request $request){
+        
+        $id = $request->input('id');
+        
+   $results = DB::select(DB::raw("SELECT A.*,
+   			(SELECT CONCAT((SELECT C.product_name 
+             			    FROM products C where C.id = B.pro_id),  '-', B.sub_name ) as abc
+                    FROM sub_products B where B.id = A.sub_product_id
+                    ) as pro_name
+            FROM `stocks` A  WHERE A.stock_main_id = '$id'"));
+        
+        return response()->json(['count' => count($results), 'data' => $results]);
+        
+    }
 
 }

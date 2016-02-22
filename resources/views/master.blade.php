@@ -128,7 +128,7 @@
                             <ul class="nav nav-second-level">
                                 <li id="grn" ><a href="grn">Good Recieve Note</a></li>
                                 <li id="stocks" ><a href="astocks">Active Stocks</a></li>
-                                <li id="log" ><a href="astocks">Stock History</a></li>
+                                <li id="log" ><a href="stock_history">Stock History</a></li>
                                 
 
 
@@ -143,6 +143,7 @@
                             <ul class="nav nav-second-level">
                                 <li id="load" ><a href="load">Available Vehicles</a></li>
                                 <li id="act" ><a href="active-vehicles">Active Vehicles</a></li>
+                                <li id="lhis" ><a href="load-history">Loading History</a></li>
                                 
 
 

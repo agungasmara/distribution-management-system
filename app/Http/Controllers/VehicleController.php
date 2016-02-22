@@ -148,31 +148,42 @@ class VehicleController extends Controller
         foreach ($data as $d){
 
 
-            $stocks = stock::where('status','ACTIVE')
-                ->where('sub_product_id', $d['product_id'])
-                ->where('available', '>', '0')
-                ->orderBy('expiry_date','ASC')
-                ->first();
+            $extra = 10;
+            $iteration = 0;
+            while($extra != 0){
+                $stocks = stock::where('status','ACTIVE')
+                    ->where('sub_product_id', $d['product_id'])
+                    ->where('available', '>', '0')
+                    ->orderBy('expiry_date','ASC')
+                    ->first();
 
+                if( $iteration  == 0){
+                    $item = new loadItem;
 
+                    $item->load_main_id = $id;
+                    $item->sub_product_id = $d['product_id'];
+                    $item->number =$d['quantity'];
+                    $item->stock_id = $stocks->id;
+                    $item->save();
+                    $iteration++;
+                }
+                $stockUpdate = stock::find($stocks->id);
 
+                if(($stocks->available - $d['quantity']) > 0){
 
+                    $stockUpdate->available = ($stocks->available - $d['quantity']);
+                    $extra = 0;    
+                }else{
 
+                    $d['quantity'] =  ($d['quantity'] - $stockUpdate->available);
+                    $stockUpdate->available = '0';
+                    $stockUpdate->status = 'OVER';    
 
-            $item = new loadItem;
+                }
 
-            $item->load_main_id = $id;
-            $item->sub_product_id = $d['product_id'];
-            $item->number =$d['quantity'];
-            $item->stock_id = $stocks->id;
-            $item->save();
+                $stockUpdate->save();
 
-            $stockUpdate = stock::find($stocks->id);
-            $stockUpdate->available = ($stocks->available - $d['quantity']);
-
-            $stockUpdate->save();
-
-
+            }
 
         }
 
@@ -257,4 +268,20 @@ class VehicleController extends Controller
 
     }
 
+    public function loadHistory(){
+
+        return view('LoadUnload.history');
+
+    }
+
+    public function search_load(Request $request){
+
+        $month = $request->input('date');
+
+        $results = DB::select(DB::raw("Select A.*,  
+        (SELECT B.vehicle_number FROM `vehicles` B where B.id = A.vehicle_id ) as vnum from `loading_main` A Order By A.load_date DESC"));
+
+
+        return response()->json(['count' => count($results), 'data' => $results]);
+    }
 }

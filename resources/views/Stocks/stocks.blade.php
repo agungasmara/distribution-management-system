@@ -24,9 +24,9 @@ Stocks
 @endsection
 
 
-@section('headerbuttons')
+@section('headerbuttons')<!--
 <button class="btn btn-primary btn-rounded  " type="button" data-toggle="modal" data-target="#add-routes"><i class="fa fa-plus"></i>
-    ADD NEW         </button> <b></b>
+    ADD NEW         </button> <b></b> -->
 @endsection
 
 
@@ -48,13 +48,10 @@ Stocks
                         <tr>
                             <th>#</th>
 
-                            <th>Name</th>
-                            <th>NIC</th>
-                            <th>Phone</th>
-
-                            <th>Remarks</th>
-                            <th class="col-md-1"></th>
-                            <th class="col-md-1"></th>
+                            <th>Product Name</th>
+                          <th> Available Quantity</th>
+                              <th> Status</th>
+                             
                         </tr>
                     </thead>
                     <tbody>
@@ -304,23 +301,32 @@ Stocks
         oTable.destroy();
 
         $('#dd').DataTable( {
-            "ajax": "get-reps",
+            "ajax": "get-activestocks",
             "columns": [
                 { "data": "id" },
-                { "data": "rep_name" },
-                { "data": "nic" },
-                { "data": "phone" },
-                { "data": "remarks" },
-                {"data" : null,
+                 {"data" : null,
                  "mRender": function(data, type, full) {
-                     return '<button class="btn btn-info  btn-animate btn-animate-side btn-block btn-sm" onclick="edit('+data.id+')"> Edit </button>' ;
+                     return data.product_name + ' - '+ data.sub_name;
                  }
-                },
-                {"data" : null,
+                 },
+                 { "data": "count1" },
+                 {"data" : null,
                  "mRender": function(data, type, full) {
-                     return '<button class="btn btn-danger  btn-animate btn-animate-side btn-block btn-sm" onclick="del('+data.id+')"> Delete </button>' ;
+                    
+                     if(data.count1 > 500){
+                         
+                         return '<span class="label label-primary"> VERY GOOD </span>';
+                     }else  if(data.count1 > 100){
+                         
+                         return '<span class="label label-warning"> AVERAGE </span>';
+                     }else{
+                          return '<span class="label label-danger"> LOW </span>';
+                         
+                     }
+                     
                  }
                 }
+              
             ]
         } );
 

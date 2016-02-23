@@ -71,13 +71,13 @@ ADD NEW         </button> <b></b> -->
 <div class="modal inmodal fade" id="stockview" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="padding:2%">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Stock Information</h4>
 
             </div>
 
-            <div class="modal-body">
+            <div class="ibox-content">
 
 
                 <table class="table table-striped table-bordered table-hover dataTables-example" id="dd1" plugin="datatable" >
@@ -86,7 +86,7 @@ ADD NEW         </button> <b></b> -->
                          
 
                             <th>Product Name</th>
-                            <th> Inital Qty</th>
+                            <th> Initial Qty</th>
                             <th> Available Qty</th>
                             <th> Expiry Date</th>
 

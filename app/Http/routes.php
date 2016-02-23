@@ -110,5 +110,6 @@ Route::get('/unload-view', 'VehicleController@unload');
 Route::get('/unloadall', 'VehicleController@unloadall');
 
 
+Route::get('/history-view', 'VehicleController@history_view');
 Route::get('/load-history', 'VehicleController@loadHistory');
 Route::get('/search_load', 'VehicleController@search_load');

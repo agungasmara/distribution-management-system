@@ -284,4 +284,24 @@ class VehicleController extends Controller
 
         return response()->json(['count' => count($results), 'data' => $results]);
     }
+
+
+
+    public function history_view(Request $request){
+
+        $id = $request->input('id');
+        $loadMain = loadMain::find($id);
+        $vehicle = vehicle::find($loadMain->vehicle_id);
+
+        $loadItems = DB::select(DB::raw("Select A.*,
+        (SELECT CONCAT( (SELECT C.product_name FROM `products` C where C.id = B.pro_id), '-',B.sub_name) FROM `sub_products` B where B.id = A.sub_product_id) as pro_name
+        from `load_items` A where A.load_main_id ='$id'")); 
+        
+        
+        return view('LoadUnload.historyview')
+                    ->with('vehicle',$vehicle)
+                    ->with('loadMain',$loadMain)
+                    ->with('loadItems',$loadItems);
+
+    }
 }

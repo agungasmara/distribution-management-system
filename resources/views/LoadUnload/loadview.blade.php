@@ -174,7 +174,7 @@ Load Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</sp
         //create  table using SQL for the database using a transaction
         mydb.transaction(function (t) {
 
-            // t.executeSql("DROP TABLE IF  EXISTS load_items_temp");
+            t.executeSql("DROP TABLE IF  EXISTS load_items_temp");
 
             t.executeSql("CREATE TABLE IF NOT EXISTS load_items_temp (id INTEGER PRIMARY KEY ASC,  product_id INTEGER, quantity INTEGER , product_name TEXT)");
         });

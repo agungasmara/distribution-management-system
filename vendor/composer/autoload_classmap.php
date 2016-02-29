@@ -488,6 +488,8 @@ return array(
     'Products' => $baseDir . '/database/migrations/2016_01_17_152153_products.php',
     'RepsTable' => $baseDir . '/database/migrations/2016_01_12_171722_reps_table.php',
     'RoutesTable' => $baseDir . '/database/migrations/2016_01_12_170911_routes_table.php',
+    'SalesLoadItems' => $baseDir . '/database/migrations/2016_02_29_051955_sales_load_items.php',
+    'SalesLoadMain' => $baseDir . '/database/migrations/2016_02_29_051947_sales_load_main.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',

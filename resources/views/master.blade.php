@@ -154,15 +154,10 @@
 
                           <li  >
                             <a href="#" id="sal"><i class="fa fa-book"></i> <span class="nav-label">SALES</span> </a>
-                            <ul class="nav nav-second-level">
-                                <li id="vsal" ><a href="load">Vehicle Sales</a></li>
-                               
-                                
-
-
-
-
-                            </ul>
+                           <!-- <ul class="nav nav-second-level">
+                                <li id="uload" ><a href="sales">Unfinished Loads</a></li>
+                              
+                            </ul> -->
                         </li>
 
                         

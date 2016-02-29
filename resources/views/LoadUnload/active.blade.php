@@ -51,6 +51,7 @@ Active Vehicles
                             <th>Type</th>
                             <th>Loaded Date</th>
                             <th>Status</th>
+                            <th class="col-md-1"></th>
                              <th class="col-md-1"></th>
 
                             <th class="col-md-1"></th>
@@ -155,6 +156,13 @@ Active Vehicles
                 {"data" : null,
                  "mRender": function(data, type, full) {
                      return '<span class="label label-success">'+data.status+' </span>';
+                 }
+                },
+                  {"data" : null,
+                 "mRender": function(data, type, full) {
+
+                     
+                     return '<a class="btn btn-success  btn-animate btn-animate-side btn-block btn-sm" href="sales?id='+data.id+'">  Sales </a>' ;
                  }
                 },
               {"data" : null,

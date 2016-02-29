@@ -119,3 +119,7 @@ Route::get('/unloadall', 'VehicleController@unloadall');
 Route::get('/history-view', 'VehicleController@history_view');
 Route::get('/load-history', 'VehicleController@loadHistory');
 Route::get('/search_load', 'VehicleController@search_load');
+
+
+Route::get('/sales','SalesController@sales');
+Route::get('/insert_sales_all','SalesController@insert_sales_all');

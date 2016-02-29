@@ -115,7 +115,7 @@ class VehicleController extends Controller
         $routes = route::all();
         $vehicle = vehicle::find($request->input('id'));
 
-        $products = DB::select(DB::raw("Select A.*, (Select B.product_name from products B where B.id = A.id) as product_name, (Select SUM(C.available) from `stocks` C where C.sub_product_id = A.id AND C.status = 'ACTIVE' ) as available From sub_products A"));
+        $products = DB::select(DB::raw("Select A.*, (Select B.product_name from products B where B.id = A.pro_id) as product_name, (Select SUM(C.available) from `stocks` C where C.sub_product_id = A.id AND C.status = 'ACTIVE' ) as available From sub_products A"));
 
         return view('LoadUnload.loadview')
             ->with('vehicle',$vehicle)
@@ -145,17 +145,21 @@ class VehicleController extends Controller
 
         $data = $request->input('data');
 
+
         foreach ($data as $d){
 
 
             $extra = 10;
             $iteration = 0;
             while($extra != 0){
+
+
                 $stocks = stock::where('status','ACTIVE')
                     ->where('sub_product_id', $d['product_id'])
                     ->where('available', '>', '0')
                     ->orderBy('expiry_date','ASC')
                     ->first();
+
 
                 if( $iteration  == 0){
                     $item = new loadItem;
@@ -163,6 +167,7 @@ class VehicleController extends Controller
                     $item->load_main_id = $id;
                     $item->sub_product_id = $d['product_id'];
                     $item->number =$d['quantity'];
+                    $item->available_qty =$d['quantity'];
                     $item->stock_id = $stocks->id;
                     $item->save();
                     $iteration++;
@@ -189,6 +194,113 @@ class VehicleController extends Controller
 
 
 
+    }
+
+    public function insert_reload(Request $request){
+
+
+        $id = $request->input('load_id');
+
+        $newItems = $request->input('data');
+
+        $updates = $request->input('updates'); 
+        
+        //var_dump($newItems);
+
+ 
+        foreach ($newItems as $d){
+
+
+            $extra = 10;
+            $iteration = 0;
+            while($extra != 0){
+
+
+                $stocks = stock::where('status','ACTIVE')
+                    ->where('sub_product_id', $d['product_id'])
+                    ->where('available', '>', '0')
+                    ->orderBy('expiry_date','ASC')
+                    ->first();
+
+
+                if( $iteration  == 0){
+                    $item = new loadItem;
+
+                    $item->load_main_id = $id;
+                    $item->sub_product_id = $d['product_id'];
+                    $item->number = $d['quantity'];
+                    $item->available_qty = $d['quantity'];
+                    $item->stock_id = $stocks->id;
+                    $item->save();
+                    $iteration++;
+                }
+                $stockUpdate = stock::find($stocks->id);
+
+                if(($stocks->available - $d['quantity']) > 0){
+
+                    $stockUpdate->available = ($stocks->available - $d['quantity']);
+                    $extra = 0;    
+                }else{
+
+                    $d['quantity'] =  ($d['quantity'] - $stockUpdate->available);
+                    $stockUpdate->available = '0';
+                    $stockUpdate->status = 'OVER';    
+
+                }
+
+                $stockUpdate->save();
+
+            }
+
+        } 
+
+        foreach ($updates as $u){
+
+
+            $itemNew = loadItem::find($u['loadItemId']);
+
+            $itemNew->number =  ($itemNew->number + $u['qty']);
+            $itemNew->available_qty =  ($itemNew->available_qty + $u['qty']);
+
+            $pid = $itemNew->sub_product_id;
+
+             $itemNew->save();
+
+            $extra1 = 1;
+
+           while($extra1 != 0){
+
+
+                $stocksNew = stock::where('status','ACTIVE')
+                    ->where('sub_product_id',  $pid)
+                    ->where('available', '>', '0')
+                    ->orderBy('expiry_date','ASC')
+                    ->first();
+
+
+
+                $stockUpdateNew = stock::find($stocksNew->id);
+
+                if(($stocksNew->available - $u['qty']) > 0){
+
+                    $stockUpdateNew->available = ($stocksNew->available - $u['qty']);
+                    $extra1 = 0;    
+                }else{
+
+                    $u['qty'] =  ($u['qty'] - $stockUpdateNew->available);
+                    $stockUpdateNew->available = '0';
+                    $stockUpdateNew->status = 'OVER';    
+
+                }
+
+                $stockUpdateNew->save();
+
+            } 
+
+
+
+        }    
+ 
     }
 
     public function active(Request $request){
@@ -225,6 +337,30 @@ class VehicleController extends Controller
             ->with('vehicle',$vehicle)    
             ->with('loadMain',$loadMain)
             ->with('loadItems',$loadItems);
+
+    }
+
+    public function reload(Request $request){
+
+        $loadMain = loadMain::where('status','ACTIVE')
+            ->where('vehicle_id',$request->input('id'))->first();
+
+        $load_id = $loadMain->id;
+
+        $vehicle = vehicle::find($request->input('id'));
+
+        $loadItems = DB::select(DB::raw("Select A.*,
+        (SELECT CONCAT( (SELECT C.product_name FROM `products` C where C.id = B.pro_id), '-',B.sub_name) FROM `sub_products` B where B.id = A.sub_product_id) as pro_name,
+        (Select SUM(X.available) from `stocks` X where X.sub_product_id = A.sub_product_id AND X.status = 'ACTIVE') as stock_count
+        from `load_items` A where A.load_main_id  ='$load_id'"));   
+
+        $products = DB::select(DB::raw("Select A.*, (Select B.product_name from products B where B.id = A.pro_id) as product_name, (Select SUM(C.available) from `stocks` C where C.sub_product_id = A.id AND C.status = 'ACTIVE' ) as available From sub_products A where A.id NOT IN (select x.sub_product_id from `load_items` X where x.load_main_id = '$load_id') "));    
+
+        return view('LoadUnload.reload')
+            ->with('vehicle',$vehicle)    
+            ->with('loadMain',$loadMain)
+            ->with('loadItems',$loadItems)
+            ->with('products',$products);
 
     }
 
@@ -296,12 +432,12 @@ class VehicleController extends Controller
         $loadItems = DB::select(DB::raw("Select A.*,
         (SELECT CONCAT( (SELECT C.product_name FROM `products` C where C.id = B.pro_id), '-',B.sub_name) FROM `sub_products` B where B.id = A.sub_product_id) as pro_name
         from `load_items` A where A.load_main_id ='$id'")); 
-        
-        
+
+
         return view('LoadUnload.historyview')
-                    ->with('vehicle',$vehicle)
-                    ->with('loadMain',$loadMain)
-                    ->with('loadItems',$loadItems);
+            ->with('vehicle',$vehicle)
+            ->with('loadMain',$loadMain)
+            ->with('loadItems',$loadItems);
 
     }
 }

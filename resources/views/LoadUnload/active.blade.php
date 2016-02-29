@@ -51,7 +51,8 @@ Active Vehicles
                             <th>Type</th>
                             <th>Loaded Date</th>
                             <th>Status</th>
-                            
+                             <th class="col-md-1"></th>
+
                             <th class="col-md-1"></th>
 
                         </tr>
@@ -153,10 +154,16 @@ Active Vehicles
                 { "data": "load_date" },
                 {"data" : null,
                  "mRender": function(data, type, full) {
-                     return '<span class="label label-primary">'+data.status+' </span>';
+                     return '<span class="label label-success">'+data.status+' </span>';
                  }
                 },
-             
+              {"data" : null,
+                 "mRender": function(data, type, full) {
+
+                     
+                     return '<a class="btn btn-primary  btn-animate btn-animate-side btn-block btn-sm" href="reload-view?id='+data.id+'"> Reload </a>' ;
+                 }
+                },
                 {"data" : null,
                  "mRender": function(data, type, full) {
 

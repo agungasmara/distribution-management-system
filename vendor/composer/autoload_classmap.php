@@ -6,12 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddColumnLoadItems' => $baseDir . '/database/migrations/2016_02_28_124138_add_column_load_items.php',
     'Brands' => $baseDir . '/database/migrations/2016_01_30_180454_brands.php',
     'Categories' => $baseDir . '/database/migrations/2016_01_30_180618_categories.php',
     'CreateCustomers' => $baseDir . '/database/migrations/2016_01_16_090823_create_customers.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'DiscardItems' => $baseDir . '/database/migrations/2016_02_28_180813_discard_items.php',
+    'DiscardMain' => $baseDir . '/database/migrations/2016_02_28_180807_discard_main.php',
+    'EditUsersTable' => $baseDir . '/database/migrations/2016_02_28_005734_edit_users_table.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
@@ -525,7 +529,5 @@ return array(
     'SubProducts' => $baseDir . '/database/migrations/2016_01_30_180816_sub_products.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-    'VehicleLoad' => $baseDir . '/database/migrations/2016_02_22_035441_vehicle_load.php',
-    'VehicleLoadItems' => $baseDir . '/database/migrations/2016_02_22_035710_vehicle_load_items.php',
     'Vehicles' => $baseDir . '/database/migrations/2016_01_17_153318_vehicles.php',
 );

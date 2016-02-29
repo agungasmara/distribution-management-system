@@ -75,16 +75,16 @@ Load Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</sp
                     <legend> Add Products</legend>  
                     <div class="form-group">
 
-                        <label class=" col-md-2 control-label"> Product </label>
+                        <label class=" col-md-1 control-label"> Product </label>
 
-                        <div class="col-md-6" >
+                        <div class="col-md-7" >
 
                             <select class="  chosen-select" style="width:350px;" tabindex="4" id="product" name="product" onchange="change(this)" required>
 
 
                                 @foreach($products as $p)
 
-                                <option value="{{$p->id}}" data-available="{{$p->available}}" data-name="{{$p->product_name}}-{{$p->sub_name}}"> {{$p->product_name}}-{{$p->sub_name}} </option>
+                                <option value="{{$p->id}}" data-available="{{$p->available}}" data-name="{{$p->product_name}}-{{$p->sub_name}}"> {{$p->product_name}}-{{$p->sub_name}} ( <b> {{number_format($p->available)}} Stocks Available </b>)</option>
 
 
                                 @endforeach
@@ -213,11 +213,20 @@ Load Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</sp
 
         var max = $('#product').children('option:selected').data('available');
 
+        if(max == null || max == ""){
+          $('#quantity').attr({
+            "max" : 0,        // substitute your own
+            "min" : 0  
+
+        });
+            
+        }else{
         $('#quantity').attr({
             "max" : max,        // substitute your own
             "min" : 1  
 
         });
+    }
 
     }
 

@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function(){
+ 
 
-
-    return view('DEMO');
-});
+Route::get('/','LoginController@login');
+Route::get('/login','LoginController@login');
 
 
 Route::get('/routes', 'RouteController@route_main');
@@ -97,17 +96,24 @@ Route::get('/stock_history', 'StockController@stock_history');
 Route::get('/get-stock-history', 'StockController@get_stock_history');
 Route::get('/get-stock-info','StockController@get_stock_info');
 
+Route::get('/discard-stocks','StockController@discard');
+Route::get('/insert_discard','StockController@insert_discard');
+
+
 
 
 Route::get('/load','VehicleController@load');
 Route::get('/getActive-vehicles', 'VehicleController@active_vehicles');
 Route::get('/load-view', 'VehicleController@load_vehicle');
 Route::get('/insert_load', 'VehicleController@insert_load');
+Route::get('/insert_reload', 'VehicleController@insert_reload');
 
 Route::get('/active-vehicles','VehicleController@active');
 Route::get('/getLoaded-vehicles', 'VehicleController@loaded_vehicles');
 Route::get('/unload-view', 'VehicleController@unload');
+Route::get('/reload-view', 'VehicleController@reload');
 Route::get('/unloadall', 'VehicleController@unloadall');
+
 
 
 Route::get('/history-view', 'VehicleController@history_view');

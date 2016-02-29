@@ -57,7 +57,7 @@ Good Recieve Note
 
                         <label class="col-lg-2 control-label">Recieve Date</label>
 
-                        <div class="col-lg-4"><input   class="form-control" type="text" required id="rdate" name="rdate" value="{{date('d/m/Y')}}">
+                        <div class="col-lg-4"><input   class="form-control" type="text" required id="rdate" name="rdate" value="{{date('Y-m-d')}}">
 
 
                         </div> 

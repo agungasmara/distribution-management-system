@@ -544,7 +544,7 @@ Products
             success : function(data){
                 //$('#add-brands').modal('hide');
                 dataLoad();
-
+                console.log(data);
                 document.getElementById("pid").value = data;
                 enableSP();
                 dataloadP(data);
@@ -576,7 +576,8 @@ Products
                 var id =  document.getElementById("pid").value;
                 dataloadP(id);
                 $('#addSP').find("input[type=text], textarea").val("");
-
+                                
+                document.getElementById("pid").value = id;
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 console.log(thrownError);
@@ -604,6 +605,7 @@ Products
             "columns": [
                 { "data": "id" },
                 { "data": "sub_name" },
+                { "data": "buying_price" },
                 { "data": "price" },
                 { "data": "remarks" },
 

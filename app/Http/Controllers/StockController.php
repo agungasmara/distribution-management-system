@@ -67,12 +67,15 @@ class StockController extends Controller
             $iteration = 0;
             while($extra != 0){
 
-
+                
+                
                 $stocks = stock::where('status','ACTIVE')
                     ->where('sub_product_id', $i['product_id'])
                     ->where('available', '>', '0')
                     ->orderBy('expiry_date','ASC')
                     ->first();
+            
+              
 
 
                 if( $iteration  == 0){
@@ -85,6 +88,9 @@ class StockController extends Controller
                     $discardItem->save();
                     $iteration++;
                 }
+                
+                
+                
                 
                 $stockUpdate = stock::find($stocks->id);
 
@@ -101,6 +107,8 @@ class StockController extends Controller
                 }
 
                 $stockUpdate->save();
+                
+             
 
             }
 

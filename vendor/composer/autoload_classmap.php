@@ -15,6 +15,7 @@ return array(
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'DiscardItems' => $baseDir . '/database/migrations/2016_02_28_180813_discard_items.php',
     'DiscardMain' => $baseDir . '/database/migrations/2016_02_28_180807_discard_main.php',
+    'EditSales' => $baseDir . '/database/migrations/2016_02_29_160147_edit_sales.php',
     'EditUsersTable' => $baseDir . '/database/migrations/2016_02_28_005734_edit_users_table.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

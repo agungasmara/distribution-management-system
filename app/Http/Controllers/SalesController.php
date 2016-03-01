@@ -55,7 +55,9 @@ class SalesController extends Controller
         $salesMain->customer_id = $request->input('customer');
         $salesMain->sale_date = $request->input('saledate');
         $salesMain->load_main_id = $request->input('loadid');
-
+        $salesMain->discount = $request->input('fdiscount');
+        $salesMain->remarks = $request->input('remarks');
+        
         $salesMain->save();
 
         $id =  $salesMain->id;
@@ -72,7 +74,8 @@ class SalesController extends Controller
             $item->product_id = $d['product'];
             $item->quantity = $d['qty'];
             $item->total = $d['amount'];
-
+            $item->free = $d['free'];
+            $item->discount = $d['discount'];
             $item->save();
 
             $tbid = $d['tblid'];
@@ -85,6 +88,42 @@ class SalesController extends Controller
         }
 
 
+    }
+    
+    public function getsaleshisotry(Request $request){
+        
+        $id = $request->input('id');
+        
+        
+        $results = DB::select(DB::raw("select A.*,(select cus_name from customers B where B.id = A.customer_id) as cus_name
+        from sales_load_main A where A.load_main_id = '$id'"));
+        
+        
+      
+        return response()->json(['count' => count( $results), 'data' =>  $results]);
+
+        
+    }
+    
+    public function getdailysales(Request $request){
+        
+          $ldate = $request->input('ldate');
+        
+        
+        $results = DB::select(DB::raw("select A.*,(select cus_name from customers B where B.id = A.customer_id) as cus_name
+        from sales_load_main A where A.sale_date LIKE '$ldate'"));
+        
+        
+      
+        return response()->json(['count' => count( $results), 'data' =>  $results]);
+        
+    }
+    
+    public function daily_sales(){
+        
+        
+        
+        return view('Sales.daily');
     }
 
 }

@@ -50,7 +50,7 @@ Categories / Brands
 
                         <div class="panel-heading">
                             
-                            <div class="panel-options">
+                             <div class="panel-options">
 
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">Categories</a></li>

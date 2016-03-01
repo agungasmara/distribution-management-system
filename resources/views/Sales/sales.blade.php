@@ -6,7 +6,7 @@
 
 @section('heading')
 
-Enter Sales
+Sales Information
 
 
 @endsection
@@ -16,8 +16,11 @@ Enter Sales
 <li>
     <a href="#">Loading/Unloading</a>
 </li>
+<li>
+    <a href="active-vehicles">Active Vehicles</a>
+</li>
 <li class="active">
-    <strong>Active Vehicles</strong>
+    <strong>Sales Information</strong>
 </li>
 
 
@@ -25,7 +28,7 @@ Enter Sales
 
 
 @section('headerbuttons') 
-<h3 id="tot">Total : Rs.0</h3>
+
 @endsection
 
 
@@ -37,111 +40,261 @@ Enter Sales
 
 <br>
 <div class="row" style="padding:0cm">
-    <div class="col-lg-12">
+    <div class=" ">
         <div class="ibox float-e-margins">
 
             <div class="ibox-content">
-                <form class="form-horizontal" onsubmit="return save()"> 
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">ADD SALES</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">SALES HISOTRY</a></li>
+                </ul>
 
-                    <div class="form-group">
-
-                        <label class=" col-md-1 control-label"> Customer </label>
-
-                        <div class="col-md-7" >
-
-                            <select class="  chosen-select" style="width:350px;" tabindex="4" id="customer" name="customer"  >
-
-
-                                @foreach($customers  as $c)
-
-
-                                <option value="{{$c->id}}"> {{$c->cus_name}} - {{$c->address3}} </option>
-
-                                @endforeach
-
-                            </select>
-
-
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required>
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label class=" col-md-1 control-label"> Product </label>
-
-                        <div class="col-md-6" >
-
-                            <select class="  chosen-select" style="width:350px;" tabindex="4" id="product" name="product" onchange="change(this)" required>
-
-
-                                @foreach($products as $p)
-
-                                <option value="{{$p->sub_product_id}}" data-available="{{$p->available_qty}}" data-name="{{$p->sub_name}}" data-price="{{number_format($p->price,2,'.','')}}" data-tblid="{{ $p->id }}"> {{$p->sub_name}} ( <b> {{number_format($p->available_qty)}}  Available </b>)
-                                    Rs. {{number_format($p->price,2)}}                </option>
-
-
-                                @endforeach
-
-                            </select>
-
-
-
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <input name="quantity" id="quantity" type="number" placeholder="Qunatitiy" class="form-control" onchange="calPrice(this.value)" onkeypress="calPrice(this.value)" required>
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <input name="amount" id="amount" type="number" placeholder="Amount" class="form-control" required disabled>
-                        </div>
-                        <div class="col-md-1">
-
-                            <button class="btn btn-primary btn-block"  type="submit"> Add </button>
-                        </div>
-                    </div>
-                    <input type="hidden" name="total" id="total">
-                    <legend>Added Sales</legend>
-                    <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
-                        <thead>
-                            <tr>
-                                <th>#</th>
-
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-
-                                <th class="col-md-1"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl">
-
-                        </tbody>
-
-                    </table>
-                </form>
             </div>
         </div>
     </div>
 </div>
+<div class="tab-content">
+    <div id="tab-1" class="tab-pane active">
 
-<div class="col-md-offset-10">
+        <form class="form-horizontal" onsubmit="return save()"> 
 
-    <button class="btn btn-primary btn-block"  onclick="saveDB()"> Save All</button>
+            <div class="row" style="padding:0cm">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+                            <legend>Main Information</legend>
+                            <div class="form-group">
+
+                                <label class=" col-md-1 control-label"> Customer </label>
+
+                                <div class="col-md-6" >
+
+                                    <select class="  chosen-select" style="width:350px;" tabindex="4" id="customer" name="customer"  >
+
+
+                                        @foreach($customers  as $c)
+
+
+                                        <option value="{{$c->id}}"> {{$c->cus_name}} - {{$c->address3}} </option>
+
+                                        @endforeach
+
+                                    </select>
+
+
+
+                                </div>
+
+                                <label class=" col-md-2 control-label"> Sales Date </label>
+
+                                <div class="col-md-3">
+
+                                    <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class=" col-md-1 control-label"> Discount </label>
+
+                                <div class="col-md-2">
+
+                                    <input   onkeyup="changeFull()" type="text" placeholder="Full Discount"  id="fdiscount" class="form-control" value="0" required>
+                                </div>
+
+                                <label class=" col-md-1 control-label">   Total </label>
+
+                                <div class="col-md-3">
+
+                                    <input  id="total" value="0" type="text" placeholder="Sales Date" class="form-control" required>
+                                </div>
+                                <div class="col-md-5">
+
+                                    <textarea class="form-control" id="remarks"  placeholder="Any special comments?"></textarea>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row" style="padding:0cm">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+                            <legend>Add Products</legend>
+                            <div class="form-group">
+
+                                <label class=" col-md-1 control-label"> Product </label>
+
+                                <div class="col-md-11" >
+
+                                    <select class="  chosen-select" style="width:350px;" tabindex="4" id="product" name="product" onchange="change(this)" required>
+
+
+                                        @foreach($products as $p)
+
+                                        <option value="{{$p->sub_product_id}}" data-available="{{$p->available_qty}}" data-name="{{$p->sub_name}}" data-price="{{number_format($p->price,2,'.','')}}" data-tblid="{{ $p->id }}"> {{$p->sub_name}} ( <b> {{number_format($p->available_qty)}}  Available </b>)
+                                            Rs. {{number_format($p->price,2)}}                </option>
+
+
+                                        @endforeach
+
+                                    </select>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class=" col-md-1 control-label"> Quantity </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="quantity" id="quantity" type="number" placeholder="Qunatitiy" class="form-control" onchange="calPrice(this.value)" onkeyup="calPrice(this.value)" required>
+                                </div>
+
+                                <label class=" col-md-1 control-label"> Free </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="free" id="free" type="number" placeholder="Free Items" class="form-control" value="0" min="0" onkeyup="changeFree()" required>
+                                </div>
+
+                                <label class=" col-md-1 control-label"> Price </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="amount" id="amount" type="number" placeholder="Amount" class="form-control" required disabled>
+                                </div>
+
+                                <label class=" col-md-1 control-label"> Discount </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="discount" id="discount" type="text" placeholder="Discount" class="form-control" required  value="0" onkeyup="calPrice(this.value)" onchange="calPrice(this.value)">
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+
+                                <div class=" col-md-offset-9 col-md-3">
+
+                                    <button class="btn btn-success btn-block"  type="submit"> Add </button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row" style="padding:0cm">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+
+
+                            <legend>Added Sales</legend>
+                            <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Free</th>
+                                        <th>Price</th>
+                                        <th>Discount</th>
+
+                                        <th class="col-md-1"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl">
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </form>
+        <div class="col-md-offset-10">
+
+            <button class="btn btn-primary btn-block"  onclick="saveDB()"> Save All</button>
+        </div>
+
+
+
+
+        <input type="hidden" id="loadid" value="{{$loadid}}">
+    </div>
+    <div id="tab-2" class="tab-pane ">
+
+        <div class="row" style="padding:0cm">
+            <div class=" ">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-content">
+
+        <table class="table table-striped table-bordered table-hover dataTables-example" id="dd1" plugin="datatable" >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            
+                            <th> Customer Name</th>
+                            <th>Total</th>
+                            <th>Discount</th>
+                            <th>Sale Date</th>
+                            <th>Remarks</th>
+                             
+                            <th class="col-md-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+
+                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </div>
 
-<input type="hidden" id="loadid" value="{{$loadid}}">
 
 @endsection
 
@@ -162,7 +315,7 @@ Enter Sales
         // document.getElementById("man").click();
         $('#loa').click();
         document.getElementById("act").setAttribute('class','active');
-        //dataLoad();
+        dataLoad();
 
 
         $('#product').chosen({
@@ -189,45 +342,81 @@ Enter Sales
     });
 
 
+    function changeFull(){
+
+        var dis = $('#fdiscount').val();
+        var total = $('#total').val();
+
+        if((total-dis) >= 0){
+
+            document.getElementById().value = (total-dis);
+
+        }else{
+            document.getElementById("fdiscount").value = 0;
+            alert("total cannot be negative");
+        }
+
+    }
+
+    function changeFree(){
+
+
+        var unitPrice = $('#product').children('option:selected').data('price');
+
+        var free = $("#free").val();
+
+        var price = $("#amount").val();
+
+        var result = price - (free*unitPrice);
+
+        if(result >= 0){
+
+            document.getElementById("discount").value = (free*unitPrice);
+            document.getElementById("amount").value = price - (free*unitPrice);
+        }else{
+            document.getElementById("free").value = 0;
+            alert("amount cannot be negative");
+        }
+
+    }
 
     function calPrice(a){
 
         var unitPrice = $('#product').children('option:selected').data('price');
+        var discount = $('#discount').val();
 
-        document.getElementById("amount").value = ($('#quantity').val() * unitPrice);
+        var val = ($('#quantity').val() * unitPrice) - discount;
+        if(val > 0){
+            document.getElementById("amount").value = ($('#quantity').val() * unitPrice) - discount;
+        }else{
+
+            document.getElementById("discount").value = 0;
+            alert("Price cannot be negative");
+        }
 
     }
 
     function dataLoad(){
 
-        var oTable = $('#dd').DataTable();
+        var oTable = $('#dd1').DataTable();
         oTable.destroy();
 
-        $('#dd').DataTable( {
-            "ajax": "getsalesload",
+        var loadid = $('#loadid').val();
+        $('#dd1').DataTable( {
+            "ajax": "getsaleshisotry?id="+loadid,
             "columns": [
                 { "data": "id" },
-                { "data": "vehicle_model" },
-                { "data": "vehicle_number" },
-                { "data": "vehicle_type" },
-                { "data": "load_date" },
-                {"data" : null,
-                 "mRender": function(data, type, full) {
-                     return '<span class="label label-success">'+data.status+' </span>';
-                 }
-                },
+                { "data": "cus_name" },
+                { "data": "total" },
+                { "data": "discount" },
+                { "data": "sale_date" },
+                 { "data": "remarks" },
+             
                 {"data" : null,
                  "mRender": function(data, type, full) {
 
 
-                     return '<a class="btn btn-primary  btn-animate btn-animate-side btn-block btn-sm" href="reload-view?id='+data.id+'"> Reload </a>' ;
-                 }
-                },
-                {"data" : null,
-                 "mRender": function(data, type, full) {
-
-
-                     return '<a class="btn btn-danger  btn-animate btn-animate-side btn-block btn-sm" href="unload-view?id='+data.id+'"> Unload </a>' ;
+                     return '<a class="btn btn-primary  btn-animate btn-animate-side btn-block btn-sm" href="sales_view?id='+data.id+'"> View Details</a>' ;
                  }
                 }
             ]
@@ -283,6 +472,9 @@ Enter Sales
         var product = $('#product').val();
         var name = $('#product').children('option:selected').data('name');
         var tblid = $('#product').children('option:selected').data('tblid');
+        var discount = $('#discount').val();
+        var free = $('#free').val();
+
         //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
         //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
 
@@ -292,7 +484,9 @@ Enter Sales
             qty: qty,
             product:product,
             name:name,
-            tblid:tblid
+            tblid:tblid,
+            free:free,
+            discount:discount
         });
         console.log(tempInfo);
 
@@ -308,13 +502,14 @@ Enter Sales
         for(var i = 0; i< arr.length; i++){
             tot = (tot + parseFloat(arr[i].amount));
 
-            body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td>"+arr[i].qty+" </td> <td>"+arr[i].amount+" </td> <td><button class='btn btn-sm btn-danger' onclick='del("+i+")'> Delete </button> </td> </tr>";
+            body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td>"+arr[i].qty+" </td> <td>"+arr[i].free+" </td> <td>"+arr[i].amount+" </td> <td>"+arr[i].discount+" </td><td><button class='btn btn-sm btn-danger' onclick='del("+i+")'> Delete </button> </td> </tr>";
 
         } 
 
         document.getElementById("tbl").innerHTML = body;
-        document.getElementById("tot").innerHTML ="Total : Rs."+tot;
-        document.getElementById("total").value = tot;
+
+        var discount =$('#fdiscount').val();
+        document.getElementById("total").value = (tot-discount);
 
     }
 
@@ -323,7 +518,9 @@ Enter Sales
         var customer = $('#customer').val();
         var sdate = $('#sdate').val();
         var loadid = $('#loadid').val();
-        var total = $('#total').val()
+        var total = $('#total').val();
+        var fdiscount = $('#fdiscount').val();
+        var remarks = $('#remarks').val();
 
         $.ajax({
             type: "get",
@@ -333,7 +530,9 @@ Enter Sales
                 customer :customer,
                 loadid : loadid,
                 saledate : sdate,
-                total : total
+                total : total,
+                fdiscount : fdiscount,
+                remarks : remarks
 
             },
 

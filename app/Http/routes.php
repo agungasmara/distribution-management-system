@@ -123,3 +123,6 @@ Route::get('/search_load', 'VehicleController@search_load');
 
 Route::get('/sales','SalesController@sales');
 Route::get('/insert_sales_all','SalesController@insert_sales_all');
+Route::get('/getsaleshisotry','SalesController@getsaleshisotry');
+Route::get('/daily_sales','SalesController@daily_sales');
+Route::get('/getdailysales','SalesController@getdailysales');

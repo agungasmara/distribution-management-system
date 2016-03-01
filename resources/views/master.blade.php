@@ -154,10 +154,10 @@
 
                           <li  >
                             <a href="#" id="sal"><i class="fa fa-book"></i> <span class="nav-label">SALES</span> </a>
-                           <!-- <ul class="nav nav-second-level">
-                                <li id="uload" ><a href="sales">Unfinished Loads</a></li>
+                           <ul class="nav nav-second-level">
+                                <li id="daily" ><a href="daily_sales">Daily Sales</a></li>
                               
-                            </ul> -->
+                            </ul>  
                         </li>
 
                         
@@ -171,13 +171,13 @@
   
                 </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <h2>@yield('heading')</h2>
                         <ol class="breadcrumb">
                             @yield('breadcrumb')
                         </ol>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <div class="title-action">
                             @yield('headerbuttons')
                         </div>  

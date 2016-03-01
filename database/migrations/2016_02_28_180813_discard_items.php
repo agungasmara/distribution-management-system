@@ -16,7 +16,7 @@ class DiscardItems extends Migration
          Schema::create('discard_items', function(Blueprint $table){
             $table->increments('id');
             $table->integer('product_id')->nullable();
-            $table->integer('qunatity')->nullable();
+            $table->integer('quantity')->nullable();
             $table->integer('discard_main_id')->nullable();
             $table->integer('stock_id')->nullable(); 
             $table->timestamps();

@@ -156,7 +156,7 @@
                           <li  >
                             <a href="#" id="sal"><i class="fa fa-book"></i> <span class="nav-label">SALES</span> </a>
                            <ul class="nav nav-second-level">
-                                <li id="daily" ><a href="daily_sales">Daily Sales</a></li>
+                                <li id="daily" ><a href="daily_sales">Daily Sales Log</a></li>
                                 <li id="cSales" ><a href="customer_sales">Customer Sales</a></li>
                               
                             </ul>  

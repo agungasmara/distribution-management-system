@@ -6,7 +6,7 @@
 
 @section('heading')
 
-Daily Sales
+Daily Sales Log
 
 
 @endsection
@@ -17,7 +17,7 @@ Daily Sales
     <a href="#">Sales</a>
 </li>
 <li class="active">
-    <strong>Daily Sales</strong>
+    <strong>Daily Sales Log</strong>
 </li>
 
 
@@ -44,35 +44,90 @@ Daily Sales
 @section('content')
 
 <br>
+
+
+
 <div class="row" style="padding:0cm">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
 
             <div class="ibox-content">
 
-                <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
-                    <thead>
-                        <tr>
-                            <th>#</th>
+                <div class="panel blank-panel">
 
-                           
-                            <th> Total</th>
-                            <th> Discount</th>
-                            <th> Sale Date</th>
-                            <th>Remarks</th>
-                            <th class="col-md-1"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <div class="panel-heading">
 
-                    </tbody>
+                        <div class="panel-options">
 
-                </table>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">Product Sales</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false"> Customer Sales</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+
+                                <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Vehicle Number</th>
+
+
+                                            <th> Total</th>
+                                            <th> Discount</th>
+                                            <th> Sale Date</th>
+                                            <th>Remarks</th>
+                                            <th class="col-md-1"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div id="tab-2" class="tab-pane">
+
+
+
+                                <table class="table table-striped table-bordered table-hover dataTables-example" id="dd1" plugin="datatable" >
+                                    <thead>
+                                        <tr>
+                                            <th>Bill Number</th>
+
+
+                                            <th>Customer </th>
+                                            <th> Date </th>
+                                            <th> Total </th>
+                                            <th>Paid </th>
+                                            <th>Due </th>
+                                            <th class="col-md-1"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
 
             </div>
         </div>
     </div>
 </div>
+
 
 </div>
 
@@ -175,7 +230,8 @@ Daily Sales
             "columns": [
 
                 { "data": "id" },
-              
+                { "data": "vehicle" },
+
                 { "data": "total" },
                 { "data": "discount" },
                 { "data": "sale_date" },
@@ -186,6 +242,34 @@ Daily Sales
 
 
                      return '<a class="btn btn-primary  btn-animate btn-animate-side btn-block btn-sm" href="sales_view?id='+data.id+'"> View Details</a>' ;
+                 }
+                }
+            ]
+        } );
+
+
+
+        var oTable1 = $('#dd1').DataTable();
+        oTable1.destroy();
+
+
+        $('#dd1').DataTable( {
+            "ajax": "getdailysalesCus?"+f,
+            "columns": [
+
+                { "data": "bill_num" },
+
+                { "data": "customer" },
+                { "data": "date" },
+                { "data": "total" },
+                { "data": "paid" },
+                { "data": "due" },
+
+                {"data" : null,
+                 "mRender": function(data, type, full) {
+
+
+                     return '<a class="btn btn-primary  btn-animate btn-animate-side btn-block btn-sm" href="customersales_view?id='+data.id+'"> View Details</a>' ;
                  }
                 }
             ]

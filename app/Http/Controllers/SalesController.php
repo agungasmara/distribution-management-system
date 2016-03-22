@@ -128,8 +128,21 @@ class SalesController extends Controller
         $ldate = $request->input('ldate');
 
 
-        $results = DB::select(DB::raw("select A.*
-        from sales_load_main A where A.sale_date LIKE '$ldate'"));
+        $results = DB::select(DB::raw("select A.*, (select (select c.vehicle_number from vehicles c where c.id = b.vehicle_id) from loading_main b where b.id = a.load_main_id) as vehicle
+from sales_load_main A where A.sale_date LIKE '$ldate'"));
+
+
+
+        return response()->json(['count' => count( $results), 'data' =>  $results]);
+
+    }
+
+    public function getdailysalesCus(Request $request){
+
+        $ldate = $request->input('ldate');
+
+
+        $results = DB::select(DB::raw("SELECT A.*, (SELECT b.cus_name from customers b where b.id = A.customer_id) as customer FROM `customer_sales` A WHERE `date`  LIKE '$ldate'"));
 
 
 
@@ -216,6 +229,27 @@ class SalesController extends Controller
 
         $sale->save();
 
+        if($request->input('due') > 0){
+
+            $cus =  customer::find($request->input('customer'));
+
+            $cus->outstanding = ($cus->outstanding+$request->input('due'));
+
+            $cus->save();
+
+        }
+        
+        if($request->input('paid') > $request->input('total')){
+            
+            
+            $cus =  customer::find($request->input('customer'));
+
+            $cus->outstanding = ($cus->outstanding-($request->input('paid')- $request->input('total')));
+
+            $cus->save();
+            
+        }
+
         //save payments
 
         $paymentArray = $request->input('payments');
@@ -263,8 +297,8 @@ class SalesController extends Controller
             $newDoc->customer_sales_id =  $sale->id;
             $newDoc->bill_num =  $request->input('bill');
             $newDoc->doc_path = $dest;
-            
-            
+
+
             $newDoc->save();
 
             File::delete($d->doc_path);
@@ -274,6 +308,15 @@ class SalesController extends Controller
         }
 
 
+    }
+    
+    
+    public function customersales_view(Request $request){
+        
+        
+        
+        return "still under development";
+        
     }
 
 }

@@ -133,3 +133,5 @@ Route::get('/customer_sales','SalesController@customer_sales');
 Route::get('/docDelete','SalesController@docDelete');
 Route::post('/post_upload','SalesController@post_upload');
 Route::get('/insert_customer_sales','SalesController@insert_customer_sales');
+Route::get('/getdailysalesCus','SalesController@getdailysalesCus');
+Route::get('/customersales_view','SalesController@customersales_view');

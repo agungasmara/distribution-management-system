@@ -126,3 +126,10 @@ Route::get('/insert_sales_all','SalesController@insert_sales_all');
 Route::get('/getsaleshisotry','SalesController@getsaleshisotry');
 Route::get('/daily_sales','SalesController@daily_sales');
 Route::get('/getdailysales','SalesController@getdailysales');
+
+
+
+Route::get('/customer_sales','SalesController@customer_sales');
+Route::get('/docDelete','SalesController@docDelete');
+Route::post('/post_upload','SalesController@post_upload');
+Route::get('/insert_customer_sales','SalesController@insert_customer_sales');

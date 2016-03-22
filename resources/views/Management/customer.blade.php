@@ -53,6 +53,7 @@ Customer Management
                             <th>Phone</th>
                             <th>Email</th>
                             <th>City</th>
+                            <th>Outstanding</th>
                             <th>Remarks</th>
                             <th class="col-md-1"></th>
                             <th class="col-md-1"></th>
@@ -131,7 +132,12 @@ Customer Management
                       <div class="form-group">
                         <label class="col-lg-2 control-label">Email</label>
 
-                        <div class="col-lg-10"><input placeholder="someone@someplace.com" class="form-control" type="text" required id="email" name="email">
+                        <div class="col-lg-4"><input placeholder="someone@someplace.com" class="form-control" type="text" required id="email" name="email">
+                        </div>
+                          
+                           <label class="col-lg-2 control-label">Outstanding</label>
+
+                        <div class="col-lg-4"><input placeholder="Rs." class="form-control" type="text" required id="outstanding" name="outstanding" pattern="[+]?[0-9]*\.?[0-9]*">
                         </div>
                     </div>
 
@@ -346,6 +352,13 @@ Customer Management
                 { "data": "phone" },
                 { "data": "email" },
                 { "data": "address3" },
+                { "data": null,
+                "mRender": function(data,type,full){
+                    
+                    console.log(data);
+                    return "Rs."+ parseFloat(data.outstanding).toFixed(2);
+                    
+                }},
                 { "data": "remarks" },
                 {"data" : null,
                  "mRender": function(data, type, full) {

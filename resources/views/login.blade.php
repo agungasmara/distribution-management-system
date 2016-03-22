@@ -22,10 +22,10 @@
         <div>
             <div>
 
-                <h1 class="logo-name" style="font-size:1000%">DMS</h1>
+                <h1 class="logo-name" style="font-size:500%">ACCBOOKS</h1>
 
             </div>
-            <h3>Welcome to Distribution Management System</h3>
+            <h3>Welcome to ACCBOOKS</h3>
            <!-- <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             <!--</p> -->

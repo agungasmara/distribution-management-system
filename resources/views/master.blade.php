@@ -52,6 +52,7 @@
 
         <link href="{{ URL::asset('css/plugins/chosen/chosen.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('css/dropzone.css') }}" rel="stylesheet">
 
 
 
@@ -156,6 +157,7 @@
                             <a href="#" id="sal"><i class="fa fa-book"></i> <span class="nav-label">SALES</span> </a>
                            <ul class="nav nav-second-level">
                                 <li id="daily" ><a href="daily_sales">Daily Sales</a></li>
+                                <li id="cSales" ><a href="customer_sales">Customer Sales</a></li>
                               
                             </ul>  
                         </li>
@@ -215,6 +217,7 @@
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.responsive.js') }}"></script>
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.tableTools.min.js') }}"></script>
+        <script src="{{ URL::asset('js/dropzone.js') }}"></script>
 
 
 

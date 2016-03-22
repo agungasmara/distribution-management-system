@@ -55,7 +55,7 @@ Daily Sales
                         <tr>
                             <th>#</th>
 
-                            <th>Customer Name</th>
+                           
                             <th> Total</th>
                             <th> Discount</th>
                             <th> Sale Date</th>
@@ -175,7 +175,7 @@ Daily Sales
             "columns": [
 
                 { "data": "id" },
-                { "data": "cus_name" },
+              
                 { "data": "total" },
                 { "data": "discount" },
                 { "data": "sale_date" },

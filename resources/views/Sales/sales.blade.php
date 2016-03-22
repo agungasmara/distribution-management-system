@@ -65,53 +65,36 @@ Sales Information
                         <div class="ibox-content">
 
                             <legend>Main Information</legend>
-                            <div class="form-group">
 
-                                <label class=" col-md-1 control-label"> Customer </label>
-
-                                <div class="col-md-6" >
-
-                                    <select class="  chosen-select" style="width:350px;" tabindex="4" id="customer" name="customer"  >
-
-
-                                        @foreach($customers  as $c)
-
-
-                                        <option value="{{$c->id}}"> {{$c->cus_name}} - {{$c->address3}} </option>
-
-                                        @endforeach
-
-                                    </select>
-
-
-
-                                </div>
+                                  <div class="form-group">
+ 
 
                                 <label class=" col-md-2 control-label"> Sales Date </label>
 
                                 <div class="col-md-3">
 
-                                    <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required>
+                                    <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required value="{{date('Y-m-d')}}">
                                 </div>
 
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label class=" col-md-1 control-label"> Discount </label>
+                                             <label class=" col-md-1 control-label"> Discount </label>
 
                                 <div class="col-md-2">
 
-                                    <input   onkeyup="changeFull()" type="text" placeholder="Full Discount"  id="fdiscount" class="form-control" value="0" required>
+                                    <input   onkeyup="changeFull()"  type="text" placeholder="Full Discount"  id="fdiscount" class="form-control" value="0" readonly>
                                 </div>
 
                                 <label class=" col-md-1 control-label">   Total </label>
 
                                 <div class="col-md-3">
 
-                                    <input  id="total" value="0" type="text" placeholder="Sales Date" class="form-control" required>
+                                    <input  id="total" value="0" type="text" placeholder="Sales Date" class="form-control" required readonly>
                                 </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                           <label class=" col-md-2 control-label">  Remarks </label>
                                 <div class="col-md-5">
 
                                     <textarea class="form-control" id="remarks"  placeholder="Any special comments?"></textarea>
@@ -188,7 +171,7 @@ Sales Information
 
                                 <div class="col-md-2">
 
-                                    <input name="discount" id="discount" type="text" placeholder="Discount" class="form-control" required  value="0" onkeyup="calPrice(this.value)" onchange="calPrice(this.value)">
+                                    <input name="discount" id="discount" type="text" placeholder="Discount" class="form-control" required  value="0" onkeyup="calPrice(this.value)" onchange="calPrice(this.value)"  >
                                 </div>
 
 
@@ -219,7 +202,7 @@ Sales Information
                         <div class="ibox-content">
 
 
-                            <legend>Added Sales</legend>
+                            <legend>Added Product Sales</legend>
                             <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
                                 <thead>
                                     <tr>
@@ -267,25 +250,25 @@ Sales Information
 
                     <div class="ibox-content">
 
-        <table class="table table-striped table-bordered table-hover dataTables-example" id="dd1" plugin="datatable" >
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            
-                            <th> Customer Name</th>
-                            <th>Total</th>
-                            <th>Discount</th>
-                            <th>Sale Date</th>
-                            <th>Remarks</th>
-                             
-                            <th class="col-md-1"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="dd1" plugin="datatable" >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
 
-                </table>
+                                    
+                                    <th>Total</th>
+                                    <th>Discount</th>
+                                    <th>Batch Date</th>
+                                    <th>Remarks</th>
+
+                                    <th class="col-md-1"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
             </div>
@@ -349,7 +332,7 @@ Sales Information
 
         if((total-dis) >= 0){
 
-            document.getElementById().value = (total-dis);
+            document.getElementById("total").value = (total-dis);
 
         }else{
             document.getElementById("fdiscount").value = 0;
@@ -406,12 +389,23 @@ Sales Information
             "ajax": "getsaleshisotry?id="+loadid,
             "columns": [
                 { "data": "id" },
-                { "data": "cus_name" },
-                { "data": "total" },
-                { "data": "discount" },
+                 { "data": null,
+                "mRender" : function(data){
+                    
+                    
+                    return "Rs."+parseFloat(data.total).toFixed(2);
+                    
+                }},
+                { "data": null,
+                "mRender" : function(data){
+                    
+                    
+                    return "Rs."+parseFloat(data.discount).toFixed(2);
+                    
+                }},
                 { "data": "sale_date" },
-                 { "data": "remarks" },
-             
+                { "data": "remarks" },
+
                 {"data" : null,
                  "mRender": function(data, type, full) {
 
@@ -497,19 +491,24 @@ Sales Information
 
     function loadTable(arr){
 
+        var discount = 0;
         var tot = 0;
         var body = "";
         for(var i = 0; i< arr.length; i++){
             tot = (tot + parseFloat(arr[i].amount));
-
+            discount = (discount + parseFloat(arr[i].discount));
+            //alert(parseFloat(arr[i].discount));
             body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td>"+arr[i].qty+" </td> <td>"+arr[i].free+" </td> <td>"+arr[i].amount+" </td> <td>"+arr[i].discount+" </td><td><button class='btn btn-sm btn-danger' onclick='del("+i+")'> Delete </button> </td> </tr>";
 
         } 
 
         document.getElementById("tbl").innerHTML = body;
 
-        var discount =$('#fdiscount').val();
-        document.getElementById("total").value = (tot-discount);
+      
+        document.getElementById("total").value = (tot);
+        document.getElementById("fdiscount").value = discount;
+        
+        console.log(discount);
 
     }
 

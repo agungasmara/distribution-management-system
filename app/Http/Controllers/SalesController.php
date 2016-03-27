@@ -111,7 +111,7 @@ class SalesController extends Controller
     public function getsaleshisotry(Request $request){
 
         $id = $request->input('id');
-
+ 
 
         $results = DB::select(DB::raw("select A.* 
         from sales_load_main A where A.load_main_id = '$id'"));
@@ -128,7 +128,7 @@ class SalesController extends Controller
         $ldate = $request->input('ldate');
 
 
-        $results = DB::select(DB::raw("select A.*, (select (select c.vehicle_number from vehicles c where c.id = b.vehicle_id) from loading_main b where b.id = a.load_main_id) as vehicle
+        $results = DB::select(DB::raw("select A.*, (select (select c.vehicle_number from vehicles c where c.id = b.vehicle_id) from loading_main b where b.id = A.load_main_id) as vehicle
 from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
 

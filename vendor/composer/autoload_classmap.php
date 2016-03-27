@@ -533,6 +533,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\Exception' => $vendorDir . '/sebastian/recursion-context/src/Exception.php',
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'StockRecieve' => $baseDir . '/database/migrations/2016_03_27_185857_stock_recieve.php',
     'Stockmain' => $baseDir . '/database/migrations/2016_02_11_043504_stockmain.php',
     'Stocks' => $baseDir . '/database/migrations/2016_02_07_153242_stocks.php',
     'SubProducts' => $baseDir . '/database/migrations/2016_01_30_180816_sub_products.php',

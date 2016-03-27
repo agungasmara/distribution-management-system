@@ -129,6 +129,7 @@
                             <ul class="nav nav-second-level">
                                 <li id="grn" ><a href="grn">Good Recieve Note</a></li>
                                 <li id="stocks" ><a href="astocks">Active Stocks</a></li>
+                                <li id="pstocks" ><a href="pstocks">Pending Stocks</a></li>
                                 <li id="log" ><a href="stock_history">Stock History</a></li>
                                 <li id="dis"><a href="discard-stocks">Discard Stocks </a></li>
 

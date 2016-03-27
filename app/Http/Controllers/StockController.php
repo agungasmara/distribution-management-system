@@ -11,6 +11,7 @@ use App\SubProduct;
 use App\StockMain;
 use App\discardItem;
 use App\discardMain;
+use App\StockRecieve;
 
 class StockController extends Controller
 {
@@ -165,6 +166,15 @@ class StockController extends Controller
 
 
         $stock->save();
+        
+        $sm = StockMain::find($request->input('sid'));
+        
+        $sr = new StockRecieve;
+        
+        $sr->stock_id =  $stock->id;
+        $sr->recieved_qty = $request->input('qty');
+        $sr->recieved_date =  $sm->recieved_date;
+        $sr->save();
 
     }
 
@@ -270,6 +280,42 @@ class StockController extends Controller
 
         return response()->json(['count' => count($results), 'data' => $results]);
 
+    }
+    
+    public function pstocks(){
+        
+        return view('Stocks.pending');
+    }
+    
+    public function get_pending_list(){
+        
+        
+       $stocks  = DB::select(DB::raw("Select a.*, (select CONCAT((select c.product_name from products c where c.id = b.pro_id),'-',b.sub_name) from sub_products b where b.id = a.sub_product_id) as product_name, (select d.stock_code from stock_main d where d.id = a.stock_main_id) as grn from stocks a where a.pending > 0  
+        "));
+        
+         return response()->json(['count' => count($stocks), 'data' => $stocks]);
+
+    }
+    
+    public function save_pending(Request $request){
+        
+        $stock = stock::find($request->input('stock_id'));
+        
+        $stock->pending =  ($stock->pending - $request->input('qty'));
+        $stock->available =  ($stock->available + $request->input('qty'));
+        $stock->recieved =  (  $stock->recieved + $request->input('qty'));
+        
+        $stock->save();
+        
+        
+        $sr = new StockRecieve;
+        
+        $sr->stock_id =  $stock->id;
+        $sr->recieved_qty = $request->input('qty');
+        $sr->recieved_date = $request->input('rdate');
+        $sr->save();
+        
+        return "success";
     }
 
 }

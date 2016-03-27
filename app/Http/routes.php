@@ -99,6 +99,10 @@ Route::get('/get-stock-info','StockController@get_stock_info');
 Route::get('/discard-stocks','StockController@discard');
 Route::get('/insert_discard','StockController@insert_discard');
 
+Route::get('/pstocks','StockController@pstocks');
+Route::get('/get-pending-list','StockController@get_pending_list');
+Route::get('/save-pending','StockController@save_pending');
+
 
 
 

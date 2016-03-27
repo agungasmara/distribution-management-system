@@ -155,8 +155,12 @@ class StockController extends Controller
         $stock->stock_main_id = $request->input('sid');
         $stock->sub_product_id = $request->input('product');
         $stock->remarks = $request->input('remarks');
-        $stock->initial = $request->input('qty');
+        
+        $stock->initial = $request->input('tqty');
         $stock->available = $request->input('qty');
+        $stock->pending = $request->input('pqty');
+        $stock->recieved = $request->input('qty');
+        
         $stock->expiry_date = $request->input('exp');
 
 

@@ -105,7 +105,7 @@ Good Recieve Note
 
                         <label class="col-lg-2 control-label"> Product </label>
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-6">
 
                             <select class="  chosen-select" style="width:350px;" tabindex="4" id="product" name="product">
 
@@ -118,20 +118,32 @@ Good Recieve Note
                             </select>
 
                         </div>
+                        
+                          <label class="col-lg-2 control-label">Total Qty.</label>
+
+                        <div class="col-lg-2"><input   class="form-control" type="number" required id="tqty" name="tqty" onkeyup="enterQty(this.value)">
+
+                        </div>
                     </div>
                     <input type="text" id="sid" name="sid" hidden="true">
                     <div class="form-group">
 
-                        <label class="col-lg-2 control-label">Quantitiy</label>
+                        <label class="col-lg-2 control-label">Recieved</label>
 
-                        <div class="col-lg-4"><input   class="form-control" type="number" required id="qty" name="qty">
+                        <div class="col-lg-2"><input  onkeyup="recieved(this.value)"  class="form-control" type="number" required id="qty" name="qty">
 
                         </div>
 
+                             <label class="col-lg-2 control-label">Pending</label>
+
+                        <div class="col-lg-2">
+                            <input   class="form-control" type="number"   readonly required id="pqty" name="pqty">
+
+                        </div>
 
                         <label class="col-lg-2 control-label">Expiry Date</label>
 
-                        <div class="col-lg-4"><input   class="form-control" type="text" required id="exp" name="exp" >
+                        <div class="col-lg-2"><input   class="form-control" type="text" required id="exp" name="exp" >
 
 
                         </div>
@@ -178,7 +190,9 @@ Good Recieve Note
                             <th>#</th>
 
                             <th>Product</th>
-                            <th>Quantitiy</th>
+                            <th>Total</th>
+                            <th>Recieved</th>
+                             <th>Pending</th>
                             <th>Expiry Date</th>
                             <th>Remarks</th>
                             <th class="col-md-1"></th>
@@ -253,6 +267,30 @@ Good Recieve Note
     });
 
 
+    
+    function enterQty(a){
+        
+        $('#qty').val(a);
+        $('#pqty').val('0');
+        
+        
+    }
+    function recieved(a){
+        
+        var tot = $('#tqty').val();
+        
+        if(tot - a >= 0){
+        
+            $('#pqty').val((tot-a));
+            
+        }else{
+            
+             $('#qty').val(tot);
+             $('#pqty').val('0');
+            
+        }
+        
+    }
     function edit(id){
 
         document.getElementById("route_id").innerHTML = id;
@@ -323,6 +361,8 @@ Good Recieve Note
                 { "data": "id" },
                 { "data": "pro_name" },
                 { "data": "initial" },
+                { "data": "recieved" },
+                { "data": "pending" },
                 { "data": "expiry_date" },
                 { "data": "remarks" },
                 {"data" : null,

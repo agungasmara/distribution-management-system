@@ -53,7 +53,29 @@ Unload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
 
             <div class="ibox-content">
 
-                <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+               
+                
+                           <div class="form-group" >
+
+                 
+                               <div class="col-md-2">
+                        <label class="control-label pull-right" style="margin-top:5%">Unload Date </label>
+                                   
+                                   </div>
+
+                        <div class="col-md-3">
+
+                            <input name="uDate" id="uDate" type="text" placeholder="Sales Date" class="form-control" required value="{{date('Y-m-d')}}">
+                        </div>
+                               <br>
+
+                    </div>
+                
+                
+                
+                
+                
+                <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" style="margin-top:3%" >
                     <thead>
                         <tr>
 
@@ -74,7 +96,7 @@ Unload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
                             <td>{{$count + 1}}</td>
                         <td> {{ $l->pro_name }}</td>
                              <td> {{ $l->number }}</td>
-                        <td><input type="number" max="{{ $l->number }}" placeholder="Unload Quantity" min = "0" class="form-control" name="unload{{$count}}" required disabled value="{{ $l->number }}"></td>
+                        <td><input type="number" max="{{ $l->number }}" placeholder="Unload Quantity" min = "0" class="form-control" name="unload{{$count}}" required readonly value="{{ $l->number }}"></td>
                         
                         <td><input type="text" placeholder="Any Remarks?"  class="form-control" name="remarks{{$count}}"></td>
                         <input type="hidden" value="{{$l->stock_id}}" name="stock{{$count}}">
@@ -123,7 +145,14 @@ Unload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
         $('#loa').click();
         document.getElementById("act").setAttribute('class','active');
         
-
+          $('#uDate').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format:"yyyy-mm-dd"
+        });
 
     });
 

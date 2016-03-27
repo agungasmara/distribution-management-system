@@ -27,9 +27,6 @@ Customer Sales
 @section('headerbuttons') 
 
 
-<button class="btn btn-primary btn-rounded  " type="button" data-toggle="modal" data-target="#add-payment"><i class="fa fa-plus"></i>
-    PAYMENTS         </button>
-
 
 
 @endsection
@@ -144,7 +141,17 @@ Customer Sales
                 <div class="ibox-content">
 
 
-                    <legend>Payment Information</legend>
+                    
+                        <div class="col-md-10">
+                            <legend>
+                        Payment Information  </legend>  </div><div class="col-md-2">
+<button class="btn btn-primary btn-rounded  pull-right" type="button" data-toggle="modal" data-target="#add-payment"><i class="fa fa-plus"></i>
+    PAYMENTS         </button>
+                        
+                        </div> 
+                        
+                        
+
 
 
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >

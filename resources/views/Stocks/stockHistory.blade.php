@@ -86,7 +86,9 @@ ADD NEW         </button> <b></b> -->
                          
 
                             <th>Product Name</th>
-                            <th> Initial Qty</th>
+                            <th> Total </th>
+                            <th> Recieved</th>
+                            <th> Pending </th>
                             <th> Available Qty</th>
                             <th> Expiry Date</th>
 
@@ -257,6 +259,8 @@ ADD NEW         </button> <b></b> -->
                 { "data": "pro_name" },
 
                 { "data": "initial" },
+                { "data": "recieved" },
+                { "data": "pending" },
                 { "data": "available" },
                 { "data": "expiry_date" },
                 {"data" : null,

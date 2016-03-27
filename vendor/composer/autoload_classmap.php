@@ -21,6 +21,7 @@ return array(
     'EditCustomer' => $baseDir . '/database/migrations/2016_03_22_041149_edit_customer.php',
     'EditSales' => $baseDir . '/database/migrations/2016_02_29_160147_edit_sales.php',
     'EditSalesLoadMain' => $baseDir . '/database/migrations/2016_03_22_054829_edit_sales_load_main.php',
+    'EditStockItems' => $baseDir . '/database/migrations/2016_03_27_175016_edit_stock_items.php',
     'EditUsersTable' => $baseDir . '/database/migrations/2016_02_28_005734_edit_users_table.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

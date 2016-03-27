@@ -354,7 +354,7 @@ class VehicleController extends Controller
         (Select SUM(X.available) from `stocks` X where X.sub_product_id = A.sub_product_id AND X.status = 'ACTIVE') as stock_count
         from `load_items` A where A.load_main_id  ='$load_id'"));   
 
-        $products = DB::select(DB::raw("Select A.*, (Select B.product_name from products B where B.id = A.pro_id) as product_name, (Select SUM(C.available) from `stocks` C where C.sub_product_id = A.id AND C.status = 'ACTIVE' ) as available From sub_products A where A.id NOT IN (select x.sub_product_id from `load_items` X where x.load_main_id = '$load_id') "));    
+        $products = DB::select(DB::raw("Select A.*, (Select B.product_name from products B where B.id = A.pro_id) as product_name, (Select SUM(C.available) from `stocks` C where C.sub_product_id = A.id AND C.status = 'ACTIVE' ) as available From sub_products A where A.id NOT IN (select x.sub_product_id from `load_items` x where x.load_main_id = '$load_id') "));    
 
         return view('LoadUnload.reload')
             ->with('vehicle',$vehicle)    
@@ -376,7 +376,7 @@ class VehicleController extends Controller
         $loadMain = loadMain::find($request->input('loadMainId'));
 
         $loadMain->status = 'UNLOADED';
-        $loadMain->unload_date = date('Y-m-d'); 
+        $loadMain->unload_date = $request->input('uDate'); 
 
         $loadMain->save();
 

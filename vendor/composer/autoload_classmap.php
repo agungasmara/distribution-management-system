@@ -19,6 +19,7 @@ return array(
     'DiscardItems' => $baseDir . '/database/migrations/2016_02_28_180813_discard_items.php',
     'DiscardMain' => $baseDir . '/database/migrations/2016_02_28_180807_discard_main.php',
     'EditCustomer' => $baseDir . '/database/migrations/2016_03_22_041149_edit_customer.php',
+    'EditCustomerSales' => $baseDir . '/database/migrations/2016_03_28_170111_edit_customer_sales.php',
     'EditSales' => $baseDir . '/database/migrations/2016_02_29_160147_edit_sales.php',
     'EditSalesLoadMain' => $baseDir . '/database/migrations/2016_03_22_054829_edit_sales_load_main.php',
     'EditStockItems' => $baseDir . '/database/migrations/2016_03_27_175016_edit_stock_items.php',

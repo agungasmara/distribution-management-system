@@ -5,7 +5,7 @@
 
 
 @section('heading')
-Customer Sales
+Customer Sales Information
 
 
 @endsection
@@ -16,8 +16,11 @@ Customer Sales
     <a href="#">Sales</a>
 </li>
 
+<li>
+    <a href="#">Sales Log</a>
+</li>
 <li class="active">
-    <strong>Customer Sales</strong>
+    <strong>Customer Sales Information</strong>
 </li>
 
 
@@ -42,153 +45,79 @@ Customer Sales
 
 
 
-<form class="form-horizontal" onsubmit="return save()"> 
 
 
 
 
-    <div class="row" style="padding:0cm">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
+<div class="row" style="padding:0cm">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
 
-                <div class="ibox-content">
+                <legend>General Information</legend>
 
-                    <legend>Main Information</legend>
-                    <div class="form-group">
+                <div class="row">
 
-                        <label class=" col-md-1 control-label"> Bill No.</label>
-                        <div class="col-md-5">
-
-                            <input name="bill" id="bill" type="text" placeholder="Bill Number" class="form-control" required>
-                        </div>
-                        <label class=" col-md-3 control-label">Date </label>
-
-                        <div class="col-md-3">
-
-                            <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required value="{{date('Y-m-d')}}">
-                        </div>
-
+                    <div class="col-md-1">
+                        <label class=" control-label pull-right">Bill #</label>
                     </div>
-
-                    <div class="form-group">
-
-                        <label class=" col-md-1 control-label"> Customer </label>
-
-                        <div class="col-md-7" >
-
-                            <select class="  chosen-select" style="width:350px;" tabindex="4" id="customer" name="customer" onchange="change(this)" required>
-
-
-                                @foreach($customers as $c)
-
-                                <option value="{{$c->id}}"> {{$c->cus_name }} ({{$c->address3}}) </option>
-
-
-                                @endforeach
-
-                            </select>
-
-
-
-                        </div>
-
-                        <label class=" col-md-1 control-label"> Gross Sales </label>
-
-                        <div class="col-md-3">
-
-                            <input name="gsale" id="gsale" type="text" placeholder="Gross Sales" class="form-control"  readonly    required>
-                        </div>
-
+                    <div class="col-md-4">
+                        <span class="label label-primary">  {{$sales->bill_num}} </span> 
                     </div>
 
 
-                    <div class="form-group">
 
-                        <label class=" col-md-1 control-label"> Market Return </label>
-
-                        <div class="col-md-3">
-
-                            <input name="mreturn" id="mreturn" type="text" placeholder="Market Return" class="form-control"   onkeyup="calcGross()" value="0"  required>
-                        </div>
-
-                        <label class=" col-md-1 control-label"> Good Return </label>
-
-                        <div class="col-md-3">
-
-                            <input name="greturn" id="greturn" type="text" placeholder="Gross Return" class="form-control"   onkeyup="calcGross()"  value="0" required>
-                        </div>
-
-                        <label class=" col-md-1 control-label"> Sales Discount </label>
-
-                        <div class="col-md-3">
-
-                            <input name="discount" id="discount" type="text" placeholder="Sales Discount" class="form-control"    onkeyup="calcGross()" value="0" required>
-                        </div>
-
-
-
-
-
+                    <div class="col-md-1">
+                        <label class=" control-label pull-right">Date</label>
                     </div>
-                    <hr>
+                    <div class="col-md-2">
+                        {{$sales->date}}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
 
-                    <div class="form-group">
-
-                        <label class=" col-md-1 control-label"> Net Total </label>
-
-                        <div class="col-md-3">
-
-                            <input name="total" id="total" type="text" placeholder="Total bill amount" class="form-control"    onkeyup="totalChange(this.value)"  required>
-                        </div>
-
-
-                        <label class=" col-md-1 control-label"> Paid </label>
-
-                        <div class="col-md-3">
-
-                            <input name="paid" id="paid" type="text" placeholder="Paid amount" class="form-control"  readonly  required>
-                        </div>
-
-                        <label class=" col-md-1 control-label"> Due </label>
-
-                        <div class="col-md-3">
-
-                            <input name="due" id="due" type="text" placeholder="Due amount" class="form-control"  readonly  required>
-                        </div>
-
+                    <div class="col-md-1">
+                        <label class=" control-label pull-right">Customer</label>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="label label-success"  >   {{$customer->cus_name}} </span>
                     </div>
 
+                    <div class="col-md-1">
+                        <label class=" control-label pull-right">Address</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{$customer->address1}} <br>
+                        {{$customer->address2}}, {{$customer->address3}}
+                    </div>
+
+                    <div class="col-md-1">
+                        <label class=" control-label pull-right">Phone</label>
+                    </div>
+                    <div class="col-md-2">
+                        {{$customer->phone}}  
+                    </div>
 
 
                 </div>
+                <br>
+
+
+
+
             </div>
         </div>
     </div>
+</div>
 
+<div class="row" style="padding:0cm">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
 
-
-
-
-    <div class="row" style="padding:0cm">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-
-                <div class="ibox-content">
-
-
-
-                    <div class="col-md-10">
-                        <legend>
-                            Payment Information  </legend>  </div><div class="col-md-2">
-                    <button class="btn btn-primary btn-rounded  pull-right" type="button" data-toggle="modal" data-target="#add-payment"><i class="fa fa-plus"></i>
-                        PAYMENTS         </button>
-
-                    </div> 
-
-
-
-
-
+                <legend>Payment Information</legend>
+                <div class="row">
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
                         <thead>
                             <tr>
@@ -198,136 +127,83 @@ Customer Sales
                                 <th>Cheque Number</th>    
                                 <th>Cheque Date</th>
                                 <th>Cheque Bank</th>
+                                <th>Status</th>
 
 
-                                <th class="col-md-1"></th>
+
                             </tr>
                         </thead>
                         <tbody id="tbl">
+                            <?php $id=1; ?>
+                            @foreach($payments as $p)
 
+
+                            <tr>
+                                <td> {{$id}}</td>
+                                <td> {{$p->type}}</td>
+                                <td> {{number_format($p->amount,2,'.',',')}}</td>
+                                <td> {{$p->chqnum}}</td>
+                                <td> {{$p->chqdate}}</td>
+                                <td> {{$p->chqbank}}</td>
+                                <td> 
+                                    @if($p->type == 'CASH')
+
+                                    <span class="label label-primary">CASHED</span>
+                                    @elseif($p->status == 'PENDING')
+                                    <span class="label label-danger">{{$p->status}}</span>
+                                    @else
+                                    <span class="label label-primary">{{$p->status}}</span>
+                                    @endif
+
+                                </td>
+
+
+
+                            </tr>
+
+                            <?php $id++; ?>
+                            @endforeach
                         </tbody>
 
                     </table>
-
-
                 </div>
-            </div>
-        </div>
-
-    </div>
-
-
-</form>
-
-
-<div class="row" style="padding:0cm">
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-
-            <div class="ibox-content">
-
-
-                <legend>Documents</legend>
-
-
-                <form action="post_upload" class="dropzone" id="my-awesome-dropzone">
-
-                    <input name="_token" value="{{csrf_token()}}" hidden="">
-                </form>
-
 
 
             </div>
         </div>
     </div>
-
-</div>
-<div class="col-md-offset-10">
-
-
-    <button class="btn btn-primary btn-block"  onclick="saveDB()"> Save All</button>
 </div>
 
+<div class="col-lg-12 animated fadeInRight">
 
+    <legend> Documents</legend>
+    <?php $count = 0; ?>
+    @foreach($docs as $d)
+    <div class="file-box">
+        <div class="file">
+            <a href="{{$d->doc_path}}">
+                <span class="corner"></span>
 
-
-
-
-
-
-<div class="modal inmodal fade" id="add-payment" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Add Payment</h4>
-
-            </div>
-            <form class="form-horizontal" id="addR" onsubmit="return savePayment()">
-                <div class="modal-body">
-
-
-                    <div class="form-group">
-
-                        <label class="col-lg-3 control-label"> Payment Type </label>
-
-                        <div class="col-lg-9"> <select  onchange="hideOpts(this.value)"class="form-control" required id="payment_type">
-
-                            <option value="CASH">CASH</option>
-                            <option value="CHEQUE">CHEQUE</option>
-
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"> Amount</label>
-
-                        <div class="col-lg-9"><input placeholder="Total Amount Paid" class="form-control" type="text" required id="pAmount" >
-                        </div>
-                    </div>
-
-                    <div id="payment_method" hidden="true">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label"> Cheque Date</label>
-
-                            <div class="col-lg-9"><input placeholder=" Cheque Date" class="form-control" type="text"  id="pDate" >
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label"> Cheque No.</label>
-
-                            <div class="col-lg-9"><input placeholder="Cheque Number" class="form-control" type="text"  id="pNum" >
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label"> Cheque Bank</label>
-
-                            <div class="col-lg-9"><input placeholder="Cheque Bank" class="form-control" type="text"  id="pBank" >
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
+               <div class="icon">
+                                            <i class="fa fa-file"></i>
+                                        </div>
+                <div class="file-name">
+                    Document-{{$count}}
+                    <br>
+                    <small>Added: {{$d->created_at}}</small>
                 </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </div>
-
-            </form>
+            </a>
+        </div>
     </div>
+    
+   
+    <?php $count++; ?>
+    @endforeach
 </div>
+
+
+
+
 
 
 @endsection
@@ -348,7 +224,7 @@ Customer Sales
         //document.getElementById("man").setAttribute('class','active');
         // document.getElementById("man").click();
         $('#sal').click();
-        document.getElementById("cSales").setAttribute('class','active');
+        document.getElementById("daily").setAttribute('class','active');
         // dataLoad();
 
 
@@ -438,20 +314,6 @@ Customer Sales
 
 
     }
-
-
-    function calcGross(){
-
-        var net  = parseFloat($('#total').val());
-        var mreturn  =parseFloat( $('#mreturn').val());
-        var greturn = parseFloat($('#greturn').val());
-        var discount =parseFloat( $('#discount').val());
-
-
-        $('#gsale').val((net+mreturn+greturn+discount));
-
-    }
-
     function changeFull(){
 
         var dis = $('#fdiscount').val();
@@ -674,32 +536,18 @@ Customer Sales
         var due = $('#due').val();
         var bill = $('#bill').val();
 
-        
-        var mreturn  =parseFloat( $('#mreturn').val());
-        var greturn = parseFloat($('#greturn').val());
-        var discount =parseFloat( $('#discount').val());
-
-
-        var gsale=  $('#gsale').val();
-
-
         $.ajax({
             type: "get",
             url: 'insert_customer_sales',
             data: {
-                
                 payments : tempInfo,
                 customer :customer,
                 paid : paid,
                 saledate : sdate,
                 total : total,
                 due: due,
-                bill : bill,
-                mreturn : mreturn,
-                greturn: greturn,
-                discount: discount,
-                gsale:gsale
-          
+                bill : bill
+
 
             },
 
@@ -743,7 +591,7 @@ Customer Sales
 
 
         }
-        calcGross();
+
     }
 
 </script>

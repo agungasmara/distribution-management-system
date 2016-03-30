@@ -96,7 +96,7 @@ Unload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
                             <td>{{$count + 1}}</td>
                         <td> {{ $l->pro_name }}</td>
                              <td> {{ $l->number }}</td>
-                        <td><input type="number" max="{{ $l->number }}" placeholder="Unload Quantity" min = "0" class="form-control" name="unload{{$count}}" required readonly value="{{ $l->number }}"></td>
+                        <td><input type="number"  placeholder="Unload Quantity" min = "0" class="form-control" name="unload{{$count}}" required   value=" "></td><!--{{ $l->number }} -->
                         
                         <td><input type="text" placeholder="Any Remarks?"  class="form-control" name="remarks{{$count}}"></td>
                         <input type="hidden" value="{{$l->stock_id}}" name="stock{{$count}}">

@@ -94,6 +94,16 @@ class SalesController extends Controller
             $item->total = $d['amount'];
             $item->free = $d['free'];
             $item->discount = $d['discount'];
+            
+            $item->market_return = $d['mreturn'];
+            $item->good_return = $d['greturn'];
+            $item->exchange = $d['exchange'];
+            $item->sold = $d['sold'];
+            
+            
+            
+            
+            
             $item->save();
 
             $tbid = $d['tblid'];
@@ -226,6 +236,11 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $sale->due = $request->input('due');
         $sale->paid = $request->input('paid');
         $sale->date = $request->input('saledate');
+        
+        $sale->gross_sales = $request->input('gsale');
+        $sale->market_return = $request->input('mreturn');
+        $sale->good_return = $request->input('greturn');
+        $sale->discount = $request->input('discount');
 
         $sale->save();
 
@@ -314,8 +329,20 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
     public function customersales_view(Request $request){
         
         
+        $sales = CustomerSales::find($request->input('id'));
         
-        return "still under development";
+        $payments = CustomerPayment::where('customer_sales_id',$request->input('id'))->get();
+        
+        $docs = CustomerDocs::where('customer_sales_id',$request->input('id'))->get();
+        
+        $customer = customer::find($sales->customer_id);
+        
+        return   view('Sales.salesview')
+                    ->with('sales',$sales)
+                    ->with('payments',$payments)
+                    ->with('docs',$docs)
+                    ->with('customer',$customer);
+            
         
     }
 

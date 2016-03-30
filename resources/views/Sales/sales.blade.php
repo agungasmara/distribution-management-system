@@ -76,7 +76,18 @@ Sales Information
                                     <input name="sdate" id="sdate" type="text" placeholder="Sales Date" class="form-control" required value="{{date('Y-m-d')}}">
                                 </div>
 
-                                             <label class=" col-md-1 control-label"> Discount </label>
+                                      
+                                        <label class=" col-md-2 control-label">  Remarks </label>
+                                <div class="col-md-5">
+
+                                    <textarea class="form-control" id="remarks"  placeholder="Any special comments?"></textarea>
+                                </div>
+                            
+                            </div>
+
+                            <div class="form-group" hidden="true">
+
+                                          <label class=" col-md-1 control-label"> Discount </label>
 
                                 <div class="col-md-2">
 
@@ -90,15 +101,6 @@ Sales Information
                                     <input  id="total" value="0" type="text" placeholder="Sales Date" class="form-control" required readonly>
                                 </div>
 
-                            </div>
-
-                            <div class="form-group">
-
-                           <label class=" col-md-2 control-label">  Remarks </label>
-                                <div class="col-md-5">
-
-                                    <textarea class="form-control" id="remarks"  placeholder="Any special comments?"></textarea>
-                                </div>
 
                             </div>
 
@@ -146,21 +148,63 @@ Sales Information
 
                             <div class="form-group">
 
-                                <label class=" col-md-1 control-label"> Quantity </label>
-
-                                <div class="col-md-2">
-
-                                    <input name="quantity" id="quantity" type="number" placeholder="Qunatitiy" class="form-control" onchange="calPrice(this.value)" onkeyup="calPrice(this.value)" required>
-                                </div>
+                            
 
                                 <label class=" col-md-1 control-label"> Free </label>
 
                                 <div class="col-md-2">
 
-                                    <input name="free" id="free" type="number" placeholder="Free Items" class="form-control" value="0" min="0" onkeyup="changeFree()" required>
+                                    <input name="free" id="free" type="number" placeholder="Free Items" class="form-control" value="0" min="0"  onkeyup=" calcQty(this)" required>
                                 </div>
 
-                                <label class=" col-md-1 control-label"> Price </label>
+                                  <label class=" col-md-2 control-label"> Market Return </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="mreturn" id="mreturn" type="number" placeholder="Market Return" class="form-control" value="0" min="0" onkeyup=" calcQty(this)"  required>
+                                </div>
+                   
+                                  <label class=" col-md-2 control-label"> Good Return </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="greturn" id="greturn" type="number" placeholder="Good Return" class="form-control" value="0" min="0"  onkeyup=" calcQty(this)" required>
+                                </div>
+                   
+
+                            </div>
+                            
+                            <hr>
+                            <div class="form-group">
+                            
+                                <label class=" col-md-1 control-label"> Quantity </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="quantity" id="quantity" type="number" placeholder="Qunatitiy" class="form-control" readonly onkeyup=" calcQty(this)" required>
+                                </div>
+                                
+                                
+                                   <label class=" col-md-2 control-label"> Exchange Quantity </label>
+
+                                <div class="col-md-2">
+
+                                    <input name="exchange" id="exchange" type="number" placeholder="Exchange Quantity" class="form-control" onkeyup=" calcQty(this)"  value="0"  required>
+                                </div>
+                            
+                                
+                                
+                                   <label class=" col-md-2 control-label"> Sold Quantity</label>
+
+                                <div class="col-md-2">
+
+                                    <input name="sold" id="sold" type="number" placeholder="Sold Quantity" class="form-control" onkeyup=" calcQty(this)"  value="0"  required>
+                                </div>
+                                
+                            </div>
+                            
+                            <div hidden="true">
+                                         <label class=" col-md-1 control-label"> Price </label>
 
                                 <div class="col-md-2">
 
@@ -174,7 +218,7 @@ Sales Information
                                     <input name="discount" id="discount" type="text" placeholder="Discount" class="form-control" required  value="0" onkeyup="calPrice(this.value)" onchange="calPrice(this.value)"  >
                                 </div>
 
-
+                            
                             </div>
                             <div class="form-group">
 
@@ -209,11 +253,13 @@ Sales Information
                                         <th>#</th>
 
                                         <th>Product Name</th>
-                                        <th>Quantity</th>
+                                        <th>Net Qty</th>
                                         <th>Free</th>
-                                        <th>Price</th>
-                                        <th>Discount</th>
-
+                                        <th>Sold</th>
+                                        <th>Market Return</th>
+                                        <th>Good Return</th>
+                                        <th>Exchange</th>
+                                        
                                         <th class="col-md-1"></th>
                                     </tr>
                                 </thead>
@@ -256,8 +302,7 @@ Sales Information
                                     <th>#</th>
 
                                     
-                                    <th>Total</th>
-                                    <th>Discount</th>
+                                    
                                     <th>Batch Date</th>
                                     <th>Remarks</th>
 
@@ -325,6 +370,33 @@ Sales Information
     });
 
 
+    function calcQty(a){
+        
+        var free = parseFloat($('#free').val());
+        var mreturn = parseFloat($('#mreturn').val());
+        var greturn = parseFloat($('#greturn').val());
+         
+        var exchange = parseFloat($('#exchange').val());
+        var sold = parseFloat($('#sold').val());
+        
+        var val = ((sold+free+exchange)-greturn);
+        
+        var available = $('#product').children('option:selected').data('available');
+        
+        if(val>available){
+        
+            a.value=0;
+           calcQty(a); 
+            alert("cannot exceed available quantity");
+            
+        }else{
+            
+           $('#quantity').val(val); 
+        }
+        //calPrice(val);
+        
+    }
+    
     function changeFull(){
 
         var dis = $('#fdiscount').val();
@@ -389,20 +461,7 @@ Sales Information
             "ajax": "getsaleshisotry?id="+loadid,
             "columns": [
                 { "data": "id" },
-                 { "data": null,
-                "mRender" : function(data){
-                    
-                    
-                    return "Rs."+parseFloat(data.total).toFixed(2);
-                    
-                }},
-                { "data": null,
-                "mRender" : function(data){
-                    
-                    
-                    return "Rs."+parseFloat(data.discount).toFixed(2);
-                    
-                }},
+            
                 { "data": "sale_date" },
                 { "data": "remarks" },
 
@@ -468,6 +527,15 @@ Sales Information
         var tblid = $('#product').children('option:selected').data('tblid');
         var discount = $('#discount').val();
         var free = $('#free').val();
+        
+        
+           
+        var mreturn = parseFloat($('#mreturn').val());
+        var greturn = parseFloat($('#greturn').val());
+         
+        var exchange = parseFloat($('#exchange').val());
+        var sold = parseFloat($('#sold').val());
+        
 
         //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
         //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
@@ -480,7 +548,11 @@ Sales Information
             name:name,
             tblid:tblid,
             free:free,
-            discount:discount
+            discount:discount,
+            mreturn:mreturn,
+            greturn:greturn,
+            exchange:exchange,
+            sold:sold
         });
         console.log(tempInfo);
 
@@ -498,7 +570,7 @@ Sales Information
             tot = (tot + parseFloat(arr[i].amount));
             discount = (discount + parseFloat(arr[i].discount));
             //alert(parseFloat(arr[i].discount));
-            body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td>"+arr[i].qty+" </td> <td>"+arr[i].free+" </td> <td>"+arr[i].amount+" </td> <td>"+arr[i].discount+" </td><td><button class='btn btn-sm btn-danger' onclick='del("+i+")'> Delete </button> </td> </tr>";
+            body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td>"+arr[i].qty+" </td> <td>"+arr[i].free+" </td> <td>"+arr[i].sold+" </td>  <td>"+arr[i].mreturn+" </td> <td>"+arr[i].greturn+" </td> <td>"+arr[i].exchange+" </td><td><button class='btn btn-sm btn-danger' onclick='del("+i+")'> Delete </button> </td> </tr>";
 
         } 
 

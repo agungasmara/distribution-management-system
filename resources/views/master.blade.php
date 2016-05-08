@@ -59,7 +59,7 @@
 
 
 
-
+<?php  $user = Auth::user(); ?>
 
 
 
@@ -83,7 +83,7 @@
                                 <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Nilesh Jayanandana</strong>
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{var_dump($user)}}</strong>
                                         </span> <span class="text-muted text-xs block">Admin <b class="caret"></b></span> </span> </a>
                                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="profile.html">Profile</a></li>
@@ -164,6 +164,16 @@
                         </li>
 
                         
+                            <li  >
+                            <a href="#" id="repo"><i class="fa fa-book"></i> <span class="nav-label">REPORTS</span> </a>
+                           <ul class="nav nav-second-level">
+                                <li id="SMI" ><a href="Sales-summary-items">Sales - Item Wise</a></li>
+                                <li id="SMC" ><a href="Sales-summary-customer">Sales -  Customer Wise</a></li>
+                                <li id="UNP" ><a href="Sales-summary-unpaid">Unpaid Customers</a></li>
+                              
+                            </ul>  
+                        </li>
+                        
                     </ul>
 
                 </div>
@@ -219,8 +229,6 @@
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.responsive.js') }}"></script>
         <script src="{{ URL::asset('js/plugins/dataTables/dataTables.tableTools.min.js') }}"></script>
         <script src="{{ URL::asset('js/dropzone.js') }}"></script>
-
-
 
 
 

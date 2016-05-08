@@ -40,6 +40,7 @@ class CustomerController extends Controller
         $cus->address3 = $request->input('add3');
         $cus->email = $request->input('email');
         $cus->outstanding = $request->input('outstanding');
+        $cus->outstanding_date = $request->input('odate');
          
        
 
@@ -73,6 +74,7 @@ class CustomerController extends Controller
         $cus->address2 = $request->input('add2');
         $cus->address3 = $request->input('add3');
         $cus->email = $request->input('email');
+        $cus->outstanding_date = $request->input('odate');
          
        
 

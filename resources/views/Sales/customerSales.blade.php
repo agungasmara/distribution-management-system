@@ -74,7 +74,7 @@ Customer Sales
 
                         <label class=" col-md-1 control-label"> Customer </label>
 
-                        <div class="col-md-7" >
+                        <div class="col-md-11" >
 
                             <select class="  chosen-select" style="width:350px;" tabindex="4" id="customer" name="customer" onchange="change(this)" required>
 
@@ -92,16 +92,66 @@ Customer Sales
 
                         </div>
 
-                        <label class=" col-md-1 control-label"> Gross Sales </label>
+                       
+
+                    </div>
+                    
+                    
+                      <div class="form-group">
+
+                        <label class=" col-md-1 control-label"> Vehicle </label>
+
+                        <div class="col-md-11" >
+
+                            <select class="  chosen-select" style="width:350px;" tabindex="4" id="vehicle" name="vehicle"  required>
+
+
+                                @foreach($vehicles as $v)
+
+                                <option value="{{$v->id}}"> {{$v->vehicle_number }} - {{$v->vehicle_type}} ({{$v->vehicle_model }}) </option>
+
+
+                                @endforeach
+
+                            </select>
+
+
+
+                        </div>
+
+                       
+
+                    </div>
+<hr>
+  <div class="form-group">
+
+                        <label class=" col-md-1 control-label">  Gross Sales </label>
 
                         <div class="col-md-3">
 
-                            <input name="gsale" id="gsale" type="text" placeholder="Gross Sales" class="form-control"  readonly    required>
+                             <input name="gsale" id="gsale" type="text" placeholder="Gross Sales" class="form-control"  readonly    required>
                         </div>
 
+                        <label class=" col-md-1 control-label"> Free Amount </label>
+
+                        <div class="col-md-3">
+
+                            <input name="free_amt" id="free_amt" type="text" placeholder="Free Amount" class="form-control"     value="0"  required>
+                        </div>
+
+                        <label class=" col-md-1 control-label"> Exchange Amount </label>
+
+                        <div class="col-md-3">
+
+                             <input name="exchange_amt" id="exchange_amt" type="text" placeholder="Exchange Amount" class="form-control"    value="0"    required>
+                        </div>
+
+
+
+
+
                     </div>
-
-
+                
                     <div class="form-group">
 
                         <label class=" col-md-1 control-label"> Market Return </label>
@@ -359,6 +409,13 @@ Customer Sales
         });
 
         $('#customer').chosen({
+
+            width:"100%"
+
+        });
+        
+        
+        $('#vehicle').chosen({
 
             width:"100%"
 

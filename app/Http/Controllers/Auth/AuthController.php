@@ -7,7 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Illuminate\Support\Facades\Auth;
+use View;
 class AuthController extends Controller
 {
     /*
@@ -28,7 +29,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $currentUser;
+    protected $redirectTo = '/customers';
+   // private $blocked_true = 1;
 
     /**
      * Create a new authentication controller instance.
@@ -38,6 +41,9 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+                
+        $this->currentUser = Auth::User();
+        View::share([ 'currentUser' => $this->currentUser ]);
     }
 
     /**
@@ -68,5 +74,23 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    
+    protected function authenticated()
+    {
+        if(Auth::check()) {
+         // dd(Auth::user());
+            
+            
+            
+        return redirect()->intended('customers');
+            
+           
+        }else{
+            
+            
+            return "case";
+        }
     }
 }

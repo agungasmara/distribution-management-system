@@ -18,6 +18,7 @@ return array(
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'DiscardItems' => $baseDir . '/database/migrations/2016_02_28_180813_discard_items.php',
     'DiscardMain' => $baseDir . '/database/migrations/2016_02_28_180807_discard_main.php',
+    'EditCus' => $baseDir . '/database/migrations/2016_04_28_161305_edit_cus.php',
     'EditCustomer' => $baseDir . '/database/migrations/2016_03_22_041149_edit_customer.php',
     'EditCustomerSales' => $baseDir . '/database/migrations/2016_03_28_170111_edit_customer_sales.php',
     'EditSales' => $baseDir . '/database/migrations/2016_02_29_160147_edit_sales.php',

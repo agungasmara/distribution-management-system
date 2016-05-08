@@ -11,10 +11,19 @@
 |
 */
 
+
+
+
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::get('/', 'Auth\AuthController@getLogin');
+Route::post('/login', 'Auth\AuthController@postLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
  
 
-Route::get('/','LoginController@login');
-Route::get('/login','LoginController@login');
+//Route::get('/','LoginController@login');
+//Route::get('/login','LoginController@login');
+
+
 
 
 Route::get('/routes', 'RouteController@route_main');
@@ -34,6 +43,16 @@ Route::get('/del_reps', 'RepController@del_reps');
 
 
 Route::get('/customers', 'CustomerController@customer_main');
+/*Route::get('/customers', function(){
+    
+    dd(Auth::user());
+    //dd( Auth::check());
+    //var_dump(Auth::user());
+    //var_dump(Auth::check());
+    //return Auth::user();
+});*/
+
+
 Route::get('/insert-customer', 'CustomerController@insert_customer');
 Route::get('/get-customer', 'CustomerController@get_customer');
 Route::get('/get_customer_info', 'CustomerController@get_customer_info');
@@ -139,3 +158,16 @@ Route::post('/post_upload','SalesController@post_upload');
 Route::get('/insert_customer_sales','SalesController@insert_customer_sales');
 Route::get('/getdailysalesCus','SalesController@getdailysalesCus');
 Route::get('/customersales_view','SalesController@customersales_view');
+
+Route::get('/Sales-summary-items','ReportController@SalesItemWise');
+Route::get('/sales_summary_itemwise_info','ReportController@sales_summary_itemwise_info');
+    
+Route::get('/Sales-summary-customer','ReportController@SalesCustomerWise');
+Route::get('/sales_summary_customerwise_info','ReportController@sales_summary_customerwise_info');
+
+
+
+Route::get('/Sales-summary-unpaid','ReportController@SalesUnpaid');
+Route::get('/sales_unpaidReport','ReportController@unpaidReport');
+
+

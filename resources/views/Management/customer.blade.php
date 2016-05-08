@@ -135,13 +135,26 @@ Customer Management
                         <div class="col-lg-4"><input placeholder="someone@someplace.com" class="form-control" type="text" required id="email" name="email">
                         </div>
                           
+                            
+                    </div>
+
+
+                          <div class="form-group">
+                       
+                          
                            <label class="col-lg-2 control-label">Outstanding</label>
 
                         <div class="col-lg-4"><input placeholder="Rs." class="form-control" type="text" required id="outstanding" name="outstanding" pattern="[+]?[0-9]*\.?[0-9]*">
                         </div>
+                              
+                               <label class="col-lg-2 control-label">Outstanding Date</label>
+
+                        <div class="col-lg-4">
+                         <input   class="form-control" type="text" required id="odate" name="odate" value="{{date('Y-m-d')}}">
+                        </div>
+                              
                     </div>
-
-
+                    
                     
 
                     <div class="form-group">
@@ -235,7 +248,22 @@ Customer Management
 
 <input id="idE" name="id" hidden="true">
                     
+   <div class="form-group">
+                       
+                          
+                           <label class="col-lg-2 control-label">Outstanding</label>
 
+                        <div class="col-lg-4">
+                            <input placeholder="Rs." class="form-control" type="text" required id="outstandingE" name="outstanding" pattern="[+]?[0-9]*\.?[0-9]*" readonly>
+                        </div>
+                              
+                               <label class="col-lg-2 control-label">Outstanding Date</label>
+
+                        <div class="col-lg-4">
+                         <input   class="form-control" type="text" required id="odateE" name="odate" >
+                        </div>
+                              
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Remarks</label>
 
@@ -272,6 +300,15 @@ Customer Management
         document.getElementById("cus").setAttribute('class','active');
         dataLoad();
 
+        
+        $('#odate').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+             format:"yyyy-mm-dd"
+        });
 
     });
 
@@ -297,6 +334,8 @@ Customer Management
                     document.getElementById("emailE").value =  data.email;
                     document.getElementById("remarksE").value =  data.remarks;
                     document.getElementById("idE").value =  id;
+                    document.getElementById("odateE").value =  data.outstanding_date;
+                    document.getElementById("outstandingE").value =  data.outstanding;
                     
                     document.getElementById("button_edit").setAttribute('onClick','edit_final('+id+')');
                 

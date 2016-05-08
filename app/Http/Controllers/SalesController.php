@@ -171,6 +171,8 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
 
         $customers = customer::all();
+        $vehicles = vehicle::all();
+        
 
         $docs  = TempDocs::where('user_id',$this->userid)->get();
 
@@ -184,7 +186,8 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
 
         return view('Sales.customerSales')
-            ->with('customers',$customers);
+            ->with('customers',$customers)
+            ->with('vehicles',$vehicles);
 
     }
 
@@ -236,6 +239,9 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $sale->due = $request->input('due');
         $sale->paid = $request->input('paid');
         $sale->date = $request->input('saledate');
+        $sale->vehicle_id = $request->input('vehicle');
+        $sale->exchange_amt = $request->input('exchange_amt');
+        $sale->free_amt = $request->input('free_amt');
         
         $sale->gross_sales = $request->input('gsale');
         $sale->market_return = $request->input('mreturn');

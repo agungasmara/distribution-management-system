@@ -83,7 +83,7 @@ GROUP BY sales_load_items.product_id;
 
         $results = DB::select(DB::raw("select 
 A.customer_id,
-(Select C.cus_name from customers c where c.id = A.customer_id) as cus_name,
+(Select c.cus_name from customers c where c.id = A.customer_id) as cus_name,
 IFNULL(FORMAT((SUM(A.free_amt) + SUM(A.market_return) + SUM(A.good_return) + SUM(A.discount) + SUM(A.total) - SUM(A.exchange_amt)) , 2),0)  as bill_amount,
 IFNULL(FORMAT(SUM(A.free_amt) , 2),0)  as free,
 IFNULL(FORMAT(SUM(A.market_return) , 2),0)  as mr,

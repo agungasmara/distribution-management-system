@@ -254,7 +254,7 @@ Customer Management
                            <label class="col-lg-2 control-label">Outstanding</label>
 
                         <div class="col-lg-4">
-                            <input placeholder="Rs." class="form-control" type="text" required id="outstandingE" name="outstanding" pattern="[+]?[0-9]*\.?[0-9]*" readonly>
+                            <input placeholder="Rs." class="form-control" type="text" required id="outstandingE" name="outstanding" pattern="[+]?[0-9]*\.?[0-9]*"  >
                         </div>
                               
                                <label class="col-lg-2 control-label">Outstanding Date</label>
@@ -302,6 +302,17 @@ Customer Management
 
         
         $('#odate').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+             format:"yyyy-mm-dd"
+        });
+        
+        
+          
+        $('#odateE').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,
             forceParse: false,

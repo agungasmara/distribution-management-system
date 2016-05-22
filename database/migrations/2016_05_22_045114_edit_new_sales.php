@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditSales extends Migration
+class EditNewSales extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class EditSales extends Migration
     public function up()
     {
         //
-       
         
-        
-         /* 
-         Schema::table('sales_load_main', function($table){
+        Schema::table('sales_load_main', function($table){
 
             $table->double('discount')->nullable();
             $table->string('remarks')->nullable();
@@ -29,7 +26,7 @@ class EditSales extends Migration
             $table->double('discount')->nullable();
             $table->integer('free')->nullable();
            
-        }); */
+        });
     }
 
     /**
@@ -40,7 +37,7 @@ class EditSales extends Migration
     public function down()
     {
         //
-      /*  Schema::table('sales_load_main', function($table){
+         Schema::table('sales_load_main', function($table){
 
             $table->dropColumn('discount');
             $table->dropColumn('remarks');
@@ -54,6 +51,6 @@ class EditSales extends Migration
             $table->dropColumn('free');
            
 
-        }); */
+        });
     }
 }

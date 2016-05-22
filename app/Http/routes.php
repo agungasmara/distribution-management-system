@@ -18,7 +18,7 @@ Route::get('/login', 'Auth\AuthController@getLogin');
 Route::get('/', 'Auth\AuthController@getLogin');
 Route::post('/login', 'Auth\AuthController@postLogin');
 Route::get('/logout', 'Auth\AuthController@getLogout');
- 
+
 
 //Route::get('/','LoginController@login');
 //Route::get('/login','LoginController@login');
@@ -44,7 +44,7 @@ Route::get('/del_reps', 'RepController@del_reps');
 
 Route::get('/customers', 'CustomerController@customer_main');
 /*Route::get('/customers', function(){
-    
+
     dd(Auth::user());
     //dd( Auth::check());
     //var_dump(Auth::user());
@@ -161,7 +161,7 @@ Route::get('/customersales_view','SalesController@customersales_view');
 
 Route::get('/Sales-summary-items','ReportController@SalesItemWise');
 Route::get('/sales_summary_itemwise_info','ReportController@sales_summary_itemwise_info');
-    
+
 Route::get('/Sales-summary-customer','ReportController@SalesCustomerWise');
 Route::get('/sales_summary_customerwise_info','ReportController@sales_summary_customerwise_info');
 
@@ -169,5 +169,13 @@ Route::get('/sales_summary_customerwise_info','ReportController@sales_summary_cu
 
 Route::get('/Sales-summary-unpaid','ReportController@SalesUnpaid');
 Route::get('/sales_unpaidReport','ReportController@unpaidReport');
+
+
+Route::get('/vendors','VendorController@vendors');
+Route::get('/vendor_save','VendorController@save_vendor');
+Route::get('/vendor_update','VendorController@update_vendor');
+Route::get('/vendor_delete','VendorController@vendor_delete');
+Route::get('/vendor_get','VendorController@get_vendors');
+Route::get('/vendor_get_info','VendorController@vendor_get_info');
 
 

@@ -106,6 +106,7 @@
                                 <li id="rou" ><a href="routes">Routes</a></li>
                                 <li id="rep" ><a href="reps">Representatives</a></li>
                                 <li id="veh" ><a href="vehicles">Vehicles</a></li>
+                                <li id="ven" ><a href="vendors">Vendors</a></li>
 
 
 

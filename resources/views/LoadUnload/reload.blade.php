@@ -32,8 +32,7 @@ Reload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
 
 @section('headerbuttons') 
 
-<button class="btn btn-primary btn-rounded  " type="button" data-toggle="modal" data-target="#add-routes"><i class="fa fa-plus"></i>
-    ADD NEW         </button> 
+
 @endsection
 
 
@@ -105,8 +104,13 @@ Reload Vehicle | <span class="label label-success">{{$vehicle->vehicle_model}}</
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <legend> New Additions to the Vehicle  </legend>
-                    <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+                    <div class="col-md-10">
+                    
+                    <legend> New Additions to the Vehicle   </legend> 
+                  
+                    </div><div class="col-md-2"><button class="btn btn-primary btn-rounded  pull-right " type="button" data-toggle="modal" data-target="#add-routes"><i class="fa fa-plus"></i>
+    ADD NEW         </button> </div>
+                      <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
                         <thead>
                             <tr>
 

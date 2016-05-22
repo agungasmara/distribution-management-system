@@ -45,6 +45,24 @@ Good Recieve Note
 
 
 
+                    <div class="form-group">
+
+                        <label class="col-lg-2 control-label">Vendor </label>
+
+                        <div class="col-lg-6">
+
+                            <select class="  chosen-select" style="width:350px;" tabindex="4" id="vendor" name="vendor">
+
+                                @foreach($vendors as $v)
+
+                                <option value="{{$v->id}}">{{$v->vendor_name}} </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                    </div>
 
 
                     <div class="form-group">
@@ -118,8 +136,8 @@ Good Recieve Note
                             </select>
 
                         </div>
-                        
-                          <label class="col-lg-2 control-label">Total Qty.</label>
+
+                        <label class="col-lg-2 control-label">Total Qty.</label>
 
                         <div class="col-lg-2"><input   class="form-control" type="number" required id="tqty" name="tqty" onkeyup="enterQty(this.value)">
 
@@ -134,7 +152,7 @@ Good Recieve Note
 
                         </div>
 
-                             <label class="col-lg-2 control-label">Pending</label>
+                        <label class="col-lg-2 control-label">Pending</label>
 
                         <div class="col-lg-2">
                             <input   class="form-control" type="number"   readonly required id="pqty" name="pqty">
@@ -192,7 +210,7 @@ Good Recieve Note
                             <th>Product</th>
                             <th>Total</th>
                             <th>Recieved</th>
-                             <th>Pending</th>
+                            <th>Pending</th>
                             <th>Expiry Date</th>
                             <th>Remarks</th>
                             <th class="col-md-1"></th>
@@ -244,6 +262,12 @@ Good Recieve Note
             width:"100%"
 
         });
+        
+          $('#vendor').chosen({
+
+            width:"100%"
+
+        });
 
         $('#rdate').datepicker({
             todayBtn: "linked",
@@ -251,7 +275,7 @@ Good Recieve Note
             forceParse: false,
             calendarWeeks: true,
             autoclose: true,
-             format:"yyyy-mm-dd"
+            format:"yyyy-mm-dd"
         });
 
 
@@ -261,35 +285,35 @@ Good Recieve Note
             forceParse: false,
             calendarWeeks: true,
             autoclose: true,
-             format:"yyyy-mm-dd"
+            format:"yyyy-mm-dd"
         });
 
     });
 
 
-    
+
     function enterQty(a){
-        
+
         $('#qty').val(a);
         $('#pqty').val('0');
-        
-        
+
+
     }
     function recieved(a){
-        
+
         var tot = $('#tqty').val();
-        
+
         if(tot - a >= 0){
-        
+
             $('#pqty').val((tot-a));
-            
+
         }else{
-            
-             $('#qty').val(tot);
-             $('#pqty').val('0');
-            
+
+            $('#qty').val(tot);
+            $('#pqty').val('0');
+
         }
-        
+
     }
     function edit(id){
 

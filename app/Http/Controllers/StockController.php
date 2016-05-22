@@ -12,19 +12,23 @@ use App\StockMain;
 use App\discardItem;
 use App\discardMain;
 use App\StockRecieve;
+use App\vendor;
 
 class StockController extends Controller
 {
 
 
     public function grn(){
+        
+        $v = vendor::all();
 
         $products = DB::select(DB::raw("Select A.*, 
         (Select B.product_name from products B where B.id = A.pro_id) as product_name
         From sub_products A"));
 
         return view('Stocks.grn')
-            ->with('products',$products); 
+            ->with('products',$products)
+            ->with('vendors',$v); 
 
 
     }
@@ -190,7 +194,7 @@ class StockController extends Controller
         $sm->stock_code = $request->input('grncode');
         $sm->remarks = $request->input('remarks');
         $sm->recieved_date = $request->input('rdate');
-
+        $sm->vendor_id = $request->input('vendor');
 
         $sm->save();
 
@@ -262,7 +266,10 @@ class StockController extends Controller
 
     public function get_stock_history(){
 
-        $stocks = StockMain::orderBy('recieved_date','DESC')->get();
+        $stocks = DB::select(DB::raw("select A.*,(select B.vendor_name from vendors B where B.id = A.vendor_id ) as vendor_name from stock_main A order by recieved_date desc "));
+        //StockMain::orderBy('recieved_date','DESC')->get();
+        
+        
         return response()->json(['count' => count($stocks), 'data' => $stocks]);
 
     }

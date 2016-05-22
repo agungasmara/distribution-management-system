@@ -13,7 +13,7 @@ class EditNewSales extends Migration
     public function up()
     {
         //
-        
+       /* 
         Schema::table('sales_load_main', function($table){
 
             $table->double('discount')->nullable();
@@ -26,7 +26,8 @@ class EditNewSales extends Migration
             $table->double('discount')->nullable();
             $table->integer('free')->nullable();
            
-        });
+        }); */
+        
     }
 
     /**

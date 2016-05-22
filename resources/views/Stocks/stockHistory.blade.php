@@ -50,6 +50,7 @@ ADD NEW         </button> <b></b> -->
 
                             <th>GRN Code</th>
                             <th> Recieved Date</th>
+                            <th> Vendor Name</th>
                             <th> Remarks</th>
                             <th></th> 
                         </tr>
@@ -107,8 +108,7 @@ ADD NEW         </button> <b></b> -->
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="button_edit">Save changes</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button> 
             </div>
         </div>
 
@@ -206,6 +206,7 @@ ADD NEW         </button> <b></b> -->
                 { "data": "stock_code" },
 
                 { "data": "recieved_date" },
+                { "data": "vendor_name" },
                 { "data": "remarks" },
                 {"data" : null,
                  "mRender": function(data, type, full) {

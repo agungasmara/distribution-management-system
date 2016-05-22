@@ -92,12 +92,12 @@ Customer Sales
 
                         </div>
 
-                       
+
 
                     </div>
-                    
-                    
-                      <div class="form-group">
+
+
+                    <div class="form-group">
 
                         <label class=" col-md-1 control-label"> Vehicle </label>
 
@@ -119,17 +119,17 @@ Customer Sales
 
                         </div>
 
-                       
+
 
                     </div>
-<hr>
-  <div class="form-group">
+                    <hr>
+                    <div class="form-group">
 
                         <label class=" col-md-1 control-label">  Gross Sales </label>
 
                         <div class="col-md-3">
 
-                             <input name="gsale" id="gsale" type="text" placeholder="Gross Sales" class="form-control"  readonly    required>
+                            <input name="gsale" id="gsale" type="text" placeholder="Gross Sales" class="form-control"  readonly    required>
                         </div>
 
                         <label class=" col-md-1 control-label"> Free Amount </label>
@@ -143,7 +143,7 @@ Customer Sales
 
                         <div class="col-md-3">
 
-                             <input name="exchange_amt" id="exchange_amt" type="text" placeholder="Exchange Amount" class="form-control"    value="0"    required>
+                            <input name="exchange_amt" id="exchange_amt" type="text" placeholder="Exchange Amount" class="form-control"    value="0"    required>
                         </div>
 
 
@@ -151,7 +151,7 @@ Customer Sales
 
 
                     </div>
-                
+
                     <div class="form-group">
 
                         <label class=" col-md-1 control-label"> Market Return </label>
@@ -265,6 +265,94 @@ Customer Sales
         </div>
 
     </div>
+
+    <div class="row" style="padding:0cm">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content">
+
+
+
+
+                    <legend>
+                        Products  </legend>   
+
+
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label">Product</label>
+                        <div class="col-md-8">
+
+                            <select class="form-control" id="product" name="product" onchange="proChange()">
+
+                                @foreach($products as $p)
+                                <option  value="{{$p->id}}" data-product="{{$p->sub_name}}" data-buy="{{$p->buying_price}}" data-sell="{{$p->price}}"> {{$p->sub_name}} </option>
+
+                                @endforeach
+
+                            </select>
+                        </div>    
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label">Quantity</label>
+                        <div class="col-md-2">
+
+                            <input type="number" class="form-control" id="qty1" name="qty1"  onkeyup="qtyChange()">
+                        </div>    
+
+
+                        <label class="col-md-1 control-label">Sold Unit Price</label>
+                        <div class="col-md-2">
+
+                            <input type="number" class="form-control" id="sp1" name="sp1" onkeyup="qtyChange()">
+                        </div>  
+
+                        <label class="col-md-1 control-label">Total</label>
+                        <div class="col-md-2">
+
+                            <input type="number" class="form-control" id="tot1" name="tot1" readonly>
+                        </div>  
+                        <div class="col-md-2">
+
+                            <button  type="button" onclick="savePro()" class="btn btn-block btn-success">Add</button>
+                        </div>
+
+                    </div>
+                    <hr>
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Original Price</th>    
+                                <th>Sold Price</th>
+                                <th>Total</th>
+                                <th>Profit Difference</th>
+
+                                <th class="col-md-1"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl1">
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
 
 
 </form>
@@ -390,6 +478,7 @@ Customer Sales
 <script>
 
     var tempInfo = [];
+    var products = [];
 
 
     $('document').ready(function(){
@@ -413,8 +502,8 @@ Customer Sales
             width:"100%"
 
         });
-        
-        
+
+
         $('#vehicle').chosen({
 
             width:"100%"
@@ -471,6 +560,64 @@ Customer Sales
 
     });
 
+    
+    function qtyChange(){
+    
+        var original = $('#product').children('option:selected').data('sell');
+        var sell =    $('#sp1').val();
+        var qty =    $('#qty1').val();
+      
+    
+        $('#tot1').val((sell*qty));
+    
+    }
+    function proChange(){
+    
+     var original = $('#product').children('option:selected').data('sell');
+        
+        $('#sp1').val(original);
+        $('#qty1').val('0');
+        $('#tot1').val('0');
+        
+    }
+    function savePro(){
+
+
+
+
+        var sellamount = $('#sp1').val();
+        var qty = $('#qty1').val();
+        var productid = $('#product').val();
+        var name = $('#product').children('option:selected').data('product');
+        var original = $('#product').children('option:selected').data('sell');
+
+        var tot = sellamount*qty;
+
+        var diff =  tot - (original*qty) ;
+
+        //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
+        //$("#product option[value='"+ product + "']").attr('disabled', true ).trigger("liszt:updated");; 
+
+        // $(" #product .chzn-select").val(product).trigger("liszt:updated");
+        products.push({
+            id:productid,
+            sell : sellamount,
+            name:name,
+            original:original,
+            tot : tot,
+            diff:diff,
+            qty:qty
+        });
+        
+
+        loadTable1(products);
+
+        return false;
+
+
+
+
+    }
 
     function delDoc(id,dropzone,file){
 
@@ -621,6 +768,21 @@ Customer Sales
 
     }
 
+    
+    function del1(id){
+        
+
+        var tot =  $('#total').val();
+        console.log(products[id]);
+        
+        tot = tot-products[id].tot;
+        
+         $('#total').val(tot);
+        
+        products.splice(id,1);
+        loadTable1(products);
+
+    }
 
     function change(a){
 
@@ -721,6 +883,30 @@ Customer Sales
 
 
     }
+    
+    
+    function loadTable1(arr){
+
+        //var fullTot = $('#total').val();
+
+        var tot = 0;
+        var body = "";
+        for(var i = 0; i< arr.length; i++){
+            tot = (tot + parseFloat(arr[i].tot));
+            body+=   "<tr> <td> "+(i+1)+"</td> <td>"+arr[i].name+" </td> <td> "+ arr[i].qty+" </td> <td>"+arr[i].original+" </td> <td>"+arr[i].sell+" </td> <td>"+arr[i].tot+" </td> <td>"+arr[i].diff+" </td><td><button type='button' class='btn btn-sm btn-danger' onclick='del1("+i+")'> Delete </button> </td> </tr>";
+
+        } 
+
+        document.getElementById("tbl1").innerHTML = body;
+
+        $('#total').val(tot);
+ 
+        // document.getElementById("total").value = (tot);
+        // document.getElementById("fdiscount").value = discount;
+
+
+
+    }
 
     function saveDB(){
 
@@ -731,7 +917,7 @@ Customer Sales
         var due = $('#due').val();
         var bill = $('#bill').val();
 
-        
+
         var mreturn  =parseFloat( $('#mreturn').val());
         var greturn = parseFloat($('#greturn').val());
         var discount =parseFloat( $('#discount').val());
@@ -744,7 +930,7 @@ Customer Sales
             type: "get",
             url: 'insert_customer_sales',
             data: {
-                
+
                 payments : tempInfo,
                 customer :customer,
                 paid : paid,
@@ -755,8 +941,9 @@ Customer Sales
                 mreturn : mreturn,
                 greturn: greturn,
                 discount: discount,
-                gsale:gsale
-          
+                gsale:gsale,
+                products:products
+
 
             },
 

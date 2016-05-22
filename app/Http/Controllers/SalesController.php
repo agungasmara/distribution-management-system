@@ -183,10 +183,14 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
             TempDocs::destroy($d->id);
 
         }
-
-
+ 
+        
+        $products = DB::select(DB::raw("Select A.*, CONCAT((select C.product_name from products C where C.id = A.pro_id),'-',A.sub_name) as sub_name from `sub_products` A"));
+        
+       
         return view('Sales.customerSales')
             ->with('customers',$customers)
+            ->with('products',$products)
             ->with('vehicles',$vehicles);
 
     }

@@ -23,6 +23,7 @@ use Session;
 use App\CustomerDocs;
 use App\CustomerPayment;
 use App\CustomerSales;
+use App\CustomerSalesProduct;
 
 class SalesController extends Controller
 {
@@ -94,16 +95,16 @@ class SalesController extends Controller
             $item->total = $d['amount'];
             $item->free = $d['free'];
             $item->discount = $d['discount'];
-            
+
             $item->market_return = $d['mreturn'];
             $item->good_return = $d['greturn'];
             $item->exchange = $d['exchange'];
             $item->sold = $d['sold'];
-            
-            
-            
-            
-            
+
+
+
+
+
             $item->save();
 
             $tbid = $d['tblid'];
@@ -121,7 +122,7 @@ class SalesController extends Controller
     public function getsaleshisotry(Request $request){
 
         $id = $request->input('id');
- 
+
 
         $results = DB::select(DB::raw("select A.* 
         from sales_load_main A where A.load_main_id = '$id'"));
@@ -172,7 +173,7 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
         $customers = customer::all();
         $vehicles = vehicle::all();
-        
+
 
         $docs  = TempDocs::where('user_id',$this->userid)->get();
 
@@ -183,11 +184,11 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
             TempDocs::destroy($d->id);
 
         }
- 
-        
+
+
         $products = DB::select(DB::raw("Select A.*, CONCAT((select C.product_name from products C where C.id = A.pro_id),'-',A.sub_name) as sub_name from `sub_products` A"));
-        
-       
+
+
         return view('Sales.customerSales')
             ->with('customers',$customers)
             ->with('products',$products)
@@ -230,7 +231,31 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
     }
 
+    /**SM AGENCY ADDITIONS**/
 
+    public function insert_customer_sales_products($arr,$id){
+
+
+         
+        foreach ($arr as $a){
+
+            $cs = new CustomerSalesProduct;
+
+            $cs->sales_id = $id;
+            $cs->product_id = $a['id'];
+            $cs->product_name = $a['name'];
+            $cs->original = $a['original'];
+            $cs->qty = $a['qty'];
+            $cs->sold = $a['sell'];
+            $cs->total = $a['tot'];
+            $cs->diff = $a['diff'];
+
+            $cs->save(); 
+        }
+
+    }
+
+    /** END **/
     public function insert_customer_sales(Request $request){
 
 
@@ -246,13 +271,20 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $sale->vehicle_id = $request->input('vehicle');
         $sale->exchange_amt = $request->input('exchange_amt');
         $sale->free_amt = $request->input('free_amt');
-        
+
         $sale->gross_sales = $request->input('gsale');
         $sale->market_return = $request->input('mreturn');
         $sale->good_return = $request->input('greturn');
         $sale->discount = $request->input('discount');
 
         $sale->save();
+
+        /**SM AGENCY ADDITIONS**/
+        $productArr = $request->input('products');
+
+        $this->insert_customer_sales_products($productArr, $sale->id);
+
+        /**END**/
 
         if($request->input('due') > 0){
 
@@ -263,22 +295,23 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
             $cus->save();
 
         }
-        
+
         if($request->input('paid') > $request->input('total')){
-            
-            
+
+
             $cus =  customer::find($request->input('customer'));
 
             $cus->outstanding = ($cus->outstanding-($request->input('paid')- $request->input('total')));
 
             $cus->save();
-            
+
         }
 
         //save payments
 
         $paymentArray = $request->input('payments');
 
+        if(!empty($paymentArray)){
         foreach($paymentArray as $p){
 
             $payment = new CustomerPayment;
@@ -304,7 +337,7 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
         }
 
-
+        }
         //save docs
 
         $docs  = TempDocs::where('user_id',$this->userid)->get();
@@ -334,26 +367,26 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
 
     }
-    
-    
+
+
     public function customersales_view(Request $request){
-        
-        
+
+
         $sales = CustomerSales::find($request->input('id'));
-        
+
         $payments = CustomerPayment::where('customer_sales_id',$request->input('id'))->get();
-        
+
         $docs = CustomerDocs::where('customer_sales_id',$request->input('id'))->get();
-        
+
         $customer = customer::find($sales->customer_id);
-        
+
         return   view('Sales.salesview')
-                    ->with('sales',$sales)
-                    ->with('payments',$payments)
-                    ->with('docs',$docs)
-                    ->with('customer',$customer);
-            
-        
+            ->with('sales',$sales)
+            ->with('payments',$payments)
+            ->with('docs',$docs)
+            ->with('customer',$customer);
+
+
     }
 
 }

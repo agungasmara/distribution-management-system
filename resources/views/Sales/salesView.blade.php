@@ -134,7 +134,10 @@ Customer Sales Information
                             </tr>
                         </thead>
                         <tbody id="tbl">
-                            <?php $id=1; ?>
+                            @if(count($payments) != 0)
+                            <?php $id=1; 
+                          
+                            ?>
                             @foreach($payments as $p)
 
 
@@ -163,6 +166,13 @@ Customer Sales Information
 
                             <?php $id++; ?>
                             @endforeach
+                            
+                            @else
+                            <tr class="danger">
+                            
+                            <td colspan="7"><center><strong>NOT PAID</strong></center></td>
+                            </tr>
+                            @endif
                         </tbody>
 
                     </table>

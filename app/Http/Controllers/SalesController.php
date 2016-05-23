@@ -379,11 +379,16 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $docs = CustomerDocs::where('customer_sales_id',$request->input('id'))->get();
 
         $customer = customer::find($sales->customer_id);
+        
+        $products = CustomerSalesProduct::where('sales_id',$request->input('id'))->get();
+        
+        
 
         return   view('Sales.salesview')
             ->with('sales',$sales)
             ->with('payments',$payments)
             ->with('docs',$docs)
+            ->with('products',$products)
             ->with('customer',$customer);
 
 

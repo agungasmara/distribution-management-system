@@ -174,6 +174,81 @@ Customer Sales Information
     </div>
 </div>
 
+<div class="row" style="padding:0cm">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+
+                <legend>Product Information</legend>
+                <div class="row">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" id="dd" plugin="datatable" >
+                        <thead>
+                            <tr>
+                               <th>#</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Original Price</th>    
+                                <th>Sold Price</th>
+                                <th>Total</th>
+                                <th>Profit Difference</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbl">
+                            <?php 
+                            $id1=1;
+                            $diff = 0;
+                            $tot = 0;
+                            ?>
+                            @foreach($products as $p)
+
+
+                            <tr>
+                                <td> {{$id1}}</td>
+                                <td> {{$p->product_name}}</td>
+                                <td> {{$p->qty}}</td>
+                                <td> Rs. {{number_format($p->original,2,'.',',')}}</td>
+                                <td> Rs. {{number_format($p->sold,2,'.',',')}}</td>
+                                <td> Rs. {{number_format($p->total,2,'.',',')}}</td>
+                                <td> Rs. {{number_format($p->diff,2,'.',',')}}</td>
+                                
+                            
+                                    
+
+
+                            </tr>
+
+                            <?php 
+                            
+                            $id1++;
+                            $diff += $p->diff;
+                            $tot += $p->total;
+                            
+                            ?>
+                            @endforeach
+                            
+                            
+                            <tr class="success">
+                            
+                            <td colspan="5" style="font-weight:600" > <center>TOTAL</center>   </td>
+                                <td style="font-weight:600">Rs. {{number_format($tot,2,'.',',')}}</td>
+                                <td style="font-weight:600">Rs. {{number_format($diff,2,'.',',')}}</td>
+                            
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="col-lg-12 animated fadeInRight">
 
     <legend> Documents</legend>

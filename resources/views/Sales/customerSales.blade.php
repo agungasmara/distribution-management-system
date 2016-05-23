@@ -123,7 +123,7 @@ Customer Sales
 
                     </div>
                     <hr>
-                    <div class="form-group">
+                    <div class="form-group" hidden="true">
 
                         <label class=" col-md-1 control-label">  Gross Sales </label>
 
@@ -152,7 +152,7 @@ Customer Sales
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" hidden="true">
 
                         <label class=" col-md-1 control-label"> Market Return </label>
 
@@ -413,6 +413,7 @@ Customer Sales
 
                             <option value="CASH">CASH</option>
                             <option value="CHEQUE">CHEQUE</option>
+                            <option value="CREDIT">CREDIT</option>
 
                             </select>
                         </div>
@@ -961,7 +962,7 @@ Customer Sales
     function hideOpts(a){
 
 
-        if(a == 'CASH'){
+        if(a == 'CASH' || a == 'CREDIT'){
 
             document.getElementById("payment_method").setAttribute("hidden",true);
 

@@ -24,6 +24,7 @@ use App\CustomerDocs;
 use App\CustomerPayment;
 use App\CustomerSales;
 use App\CustomerSalesProduct;
+use App\CustomerSalesSummary;
 
 class SalesController extends Controller
 {
@@ -233,15 +234,18 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
 
     /**SM AGENCY ADDITIONS**/
 
-    public function insert_customer_sales_products($arr,$id){
+    public function insert_customer_sales_products($arr,$sale){
 
 
-         
+        $tot = 0;
+        $original = 0;
+        $diff = 0;
+
         foreach ($arr as $a){
 
             $cs = new CustomerSalesProduct;
 
-            $cs->sales_id = $id;
+            $cs->sales_id = $sale->id;
             $cs->product_id = $a['id'];
             $cs->product_name = $a['name'];
             $cs->original = $a['original'];
@@ -251,7 +255,27 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
             $cs->diff = $a['diff'];
 
             $cs->save(); 
+
+
+            $tot +=  $a['tot'];
+            $original +=  $a['original'];
+            $diff +=  $a['diff'];
         }
+
+
+        $sum = new CustomerSalesSummary;
+
+        $sum->sales_id = $sale->id;
+        $sum->bill_no = $sale->bill_num;
+        $sum->bill_total = $tot;
+        $sum->original_total = $original;
+        $sum->difference = $diff;
+        $sum->save();
+
+
+        return $tot;
+
+
 
     }
 
@@ -282,7 +306,11 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         /**SM AGENCY ADDITIONS**/
         $productArr = $request->input('products');
 
-        $this->insert_customer_sales_products($productArr, $sale->id);
+        $correctTot =   $this->insert_customer_sales_products($productArr, $sale);
+
+        $sale->total = $correctTot;
+
+        $sale->save();
 
         /**END**/
 
@@ -312,30 +340,38 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $paymentArray = $request->input('payments');
 
         if(!empty($paymentArray)){
-        foreach($paymentArray as $p){
+            foreach($paymentArray as $p){
 
-            $payment = new CustomerPayment;
+                $payment = new CustomerPayment;
 
-            $payment->customer_sales_id =  $sale->id;
-            $payment->customer_id =  $request->input('customer');
-            $payment->bill_num =  $request->input('bill');
-            $payment->chqnum =  $p['chknum'];
-            $payment->chqdate =  $p['chkdate'];
+                $payment->customer_sales_id =  $sale->id;
+                $payment->customer_id =  $request->input('customer');
+                $payment->bill_num =  $request->input('bill');
+                $payment->chqnum =  $p['chknum'];
+                $payment->chqdate =  $p['chkdate'];
 
-            $payment->chqbank =  $p['bank'];
-            $payment->amount =  $p['amount'];
-            $payment->type =  $p['type'];
+                $payment->chqbank =  $p['bank'];
+                $payment->amount =  $p['amount'];
+                $payment->type =  $p['type'];
 
-            if( $p['type'] == 'CASH'){
-                $payment->status = "DONE";
+                if( $p['type'] == 'CASH'){
+                    
+                    $payment->status = "DONE";
+                    
+                    $summ = CustomerSalesSummary::where('sales_id',$sale->id)->first();
+                    
+                    $summ->settle_ind = 'YES';
+                    
+                    $summ->save();
+                    
+                }
+                else{
+                    $payment->status = "PENDING";
+                }
+
+                $payment->save();
+
             }
-            else{
-                $payment->status = "PENDING";
-            }
-
-            $payment->save();
-
-        }
 
         }
         //save docs
@@ -379,10 +415,10 @@ from sales_load_main A where A.sale_date LIKE '$ldate'"));
         $docs = CustomerDocs::where('customer_sales_id',$request->input('id'))->get();
 
         $customer = customer::find($sales->customer_id);
-        
+
         $products = CustomerSalesProduct::where('sales_id',$request->input('id'))->get();
-        
-        
+
+
 
         return   view('Sales.salesview')
             ->with('sales',$sales)

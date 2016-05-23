@@ -287,7 +287,7 @@ Customer Sales
                             <select class="form-control" id="product" name="product" onchange="proChange()">
 
                                 @foreach($products as $p)
-                                <option  value="{{$p->id}}" data-product="{{$p->sub_name}}" data-buy="{{$p->buying_price}}" data-sell="{{$p->price}}"> {{$p->sub_name}} </option>
+                                <option  value="{{$p->id}}" data-product="{{$p->sub_name}}" data-buy="{{$p->buying_price}}" data-sell="{{$p->price}}"> {{$p->sub_name}} (Unit Price - Rs.{{$p->price}}) </option>
 
                                 @endforeach
 
@@ -306,7 +306,7 @@ Customer Sales
                         </div>    
 
 
-                        <label class="col-md-1 control-label">Sold Unit Price</label>
+                        <label class="col-md-1 control-label">Selling Price</label>
                         <div class="col-md-2">
 
                             <input type="number" class="form-control" id="sp1" name="sp1" onkeyup="qtyChange()">
@@ -492,6 +492,7 @@ Customer Sales
         // dataLoad();
 
 
+        proChange();
         $('#product').chosen({
 
             width:"100%"
@@ -593,6 +594,8 @@ Customer Sales
         var original = $('#product').children('option:selected').data('sell');
 
         var tot = sellamount*qty;
+        
+        var or = original*qty;
 
         var diff =  tot - (original*qty) ;
 
@@ -604,7 +607,7 @@ Customer Sales
             id:productid,
             sell : sellamount,
             name:name,
-            original:original,
+            original:or,
             tot : tot,
             diff:diff,
             qty:qty

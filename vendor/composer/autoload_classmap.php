@@ -17,6 +17,7 @@ return array(
     'CustomerSalesDocs' => $baseDir . '/database/migrations/2016_03_22_144603_customer_sales_docs.php',
     'CustomerSalesPayment' => $baseDir . '/database/migrations/2016_03_22_144548_customer_sales_payment.php',
     'CustomerSalesProducts' => $baseDir . '/database/migrations/2016_05_23_083733_customer_sales_products.php',
+    'CustomerSalesSummary' => $baseDir . '/database/migrations/2016_05_23_091847_customer_sales_summary.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'DiscardItems' => $baseDir . '/database/migrations/2016_02_28_180813_discard_items.php',
     'DiscardMain' => $baseDir . '/database/migrations/2016_02_28_180807_discard_main.php',

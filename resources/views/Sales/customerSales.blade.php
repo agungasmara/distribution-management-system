@@ -101,14 +101,14 @@ Customer Sales
 
                         <label class=" col-md-1 control-label"> Vehicle </label>
 
-                        <div class="col-md-11" >
+                        <div class="col-md-8" >
 
                             <select class="  chosen-select" style="width:350px;" tabindex="4" id="vehicle" name="vehicle"  required>
 
 
                                 @foreach($vehicles as $v)
 
-                                <option value="{{$v->id}}"> {{$v->vehicle_number }} - {{$v->vehicle_type}} ({{$v->vehicle_model }}) </option>
+                                <option value="{{$v->id}}" data-status="{{$v->status }}" onchange=""> {{$v->vehicle_number }} - {{$v->vehicle_type}} ({{$v->vehicle_model }}) </option>
 
 
                                 @endforeach

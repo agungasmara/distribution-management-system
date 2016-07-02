@@ -171,6 +171,7 @@
                                 <li id="SMI" ><a href="Sales-summary-items">Sales - Item Wise</a></li>
                                 <li id="SMC" ><a href="Sales-summary-customer">Sales -  Customer Wise</a></li>
                                 <li id="UNP" ><a href="Sales-summary-unpaid">Unpaid Customers</a></li>
+                                <li id="INV" ><a href="Sales-summary-invoice">Invoice Report</a></li>
                               
                             </ul>  
                         </li>

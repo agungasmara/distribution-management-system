@@ -161,9 +161,11 @@ Route::get('/customersales_view','SalesController@customersales_view');
 
 Route::get('/Sales-summary-items','ReportController@SalesItemWise');
 Route::get('/sales_summary_itemwise_info','ReportController@sales_summary_itemwise_info');
-
 Route::get('/Sales-summary-customer','ReportController@SalesCustomerWise');
 Route::get('/sales_summary_customerwise_info','ReportController@sales_summary_customerwise_info');
+
+Route::get('/sales_summary_invoice_report','ReportController@sales_summary_invoice_report');
+Route::get('/Sales-summary-invoice','ReportController@SalesInvoice');
 
 
 

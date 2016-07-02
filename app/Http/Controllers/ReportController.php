@@ -110,6 +110,14 @@ group by A.customer_id"));
             ->with('vehicles',$vehicle);
     }
 
+    public function SalesInvoice(){
+
+        $vehicle = vehicle::all();
+        return view('Reports.invoice_report')
+            ->with('vehicles',$vehicle);
+
+    }
+
     public function unpaidReport(Request $request){
 
 
@@ -127,6 +135,41 @@ where A.due > 0
 AND A.vehicle_id = '$vehicle'
 AND A.date between '$start' AND '$end'
         "));
+
+        return response()->json(['count' => count($results), 'data' => $results]);
+    }
+
+    public function sales_summary_invoice_report(Request $request){
+
+
+        $start = $request->input('start');
+        $end = $request->input('end');
+        $vehicle = $request->input('vehicle');
+
+        if($vehicle != '0'){    
+
+            $results =    DB::select(DB::raw("
+        Select A.*,
+FORMAT(A.total,2) as net_total,
+(select cus_name from customers B where B.id = A.customer_id) as customer,
+IFNULL((select vehicle_number from vehicles B where B.id = A.vehicle_id ),'N/A') as vehicle_number
+from customer_sales A
+where A.due > 0
+AND A.vehicle_id = '$vehicle'
+AND A.date between '$start' AND '$end'
+        "));
+        }else{
+
+            $results =    DB::select(DB::raw("
+        Select A.*,
+FORMAT(A.total,2) as net_total,
+(select cus_name from customers B where B.id = A.customer_id) as customer,
+IFNULL((select vehicle_number from vehicles B where B.id = A.vehicle_id ),'N/A') as vehicle_number
+from customer_sales A
+WHERE  A.date between '$start' AND '$end';
+        "));  
+
+        }
 
         return response()->json(['count' => count($results), 'data' => $results]);
     }
